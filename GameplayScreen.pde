@@ -10,14 +10,13 @@ void setupGameplayScreen()
 
 class GameplayScreen extends GameScreen
 {
-  AnimationInstance horsePrance1;
-  AnimationInstance horsePrance2;
+  Horse horseP1;
+  Horse horseP2;
   
   GameplayScreen()
-  {
-    horsePrance1 = getAnimationInstance("prance");
-    horsePrance2 = getAnimationInstance("prance");
-    horsePrance2.setTimeScale(2);
+  {  
+    horseP1 = new Horse();
+    horseP2 = new Horse();
   }
   
   void enter()
@@ -25,15 +24,25 @@ class GameplayScreen extends GameScreen
     textFont(gameplayFont);
     textAlign(CENTER);
     shapeMode(CENTER);
-    horsePrance1.reset();
-    horsePrance2.reset();
+    
+    // initial state for our horses
+    horseP1.setAnimation("prance");
+    horseP1.setPosition(0, height);
+    horseP1.pranceTo(width/3, height/2);
+    horseP1.setScale(0.3);
+    
+    horseP2.setAnimation("prance");
+    horseP2.setAnimationSpeed(2);    
+    horseP2.setPosition(width, height);
+    horseP2.pranceTo(2*width/3, height/2);
+    horseP2.setScale(0.3);
   }
   
   void draw(float dt)
   {
-    // update stuff
-    horsePrance1.advance(dt);
-    horsePrance2.advance(dt);
+    // update the horses
+    horseP1.update(dt);
+    horseP2.update(dt);
     
     // draw stuff
     background(SUGAR_BROWN);
@@ -41,18 +50,9 @@ class GameplayScreen extends GameScreen
     textSize(24);
     text("Gameplay will happen here.", width/2, 100);
     
-    // TODO draw an animating horse in the center
-    pushMatrix();
-      translate(width/3, height/2);
-      scale(0.5);
-      horsePrance1.draw();
-    popMatrix();
-    
-    pushMatrix();
-      translate(2*width/3, height/2);
-      scale(0.5);
-      horsePrance2.draw();
-    popMatrix();
+    // draw the horsies!
+    horseP1.draw();
+    horseP2.draw();
     
     // TODO go to win or lose after time is up
   }  
