@@ -21,9 +21,15 @@
 	</animation>
 
 	<!-- and here are the tricks -->
-	<animation name="levade" fps="1">
+	<animation name="levade" fps="2">
 		<!-- TODO update with real graphics -->
-		<frame>HORSE_PRANCE_01.svg</frame>
+		<frame>HORSE_LEVADE_01.svg</frame>
+		<frame>HORSE_LEVADE_02.svg</frame>
+		<frame>HORSE_LEVADE_03.svg</frame>
+		<frame>HORSE_LEVADE_03.svg</frame>
+		<frame>HORSE_LEVADE_03.svg</frame>
+		<frame>HORSE_LEVADE_03.svg</frame>
+		<frame>HORSE_LEVADE_02.svg</frame>
 	</animation>
 
 	<animation name="courbette" fps="1">
