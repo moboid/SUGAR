@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+
+<AnimationData>
+
+	<animation name="prance" fps="2">
+		<frame>HORSE_PRANCE_01.svg</frame>
+		<frame>HORSE_PRANCE_02.svg</frame>
+	</animation>
+
+</AnimationData>
