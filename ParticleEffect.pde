@@ -9,7 +9,7 @@ ArrayList confettiBits;
 
 void setupParticleEffect()
 {
-  phys = new ParticleSystem( 2, 0.1 );
+  phys = new ParticleSystem( 0, 0.1 );
   confettiBits = new ArrayList();
 }
 
@@ -40,13 +40,15 @@ void drawParticleEffect()
 
 void triggerParticleEffect()
 {
-  for(int i = 0; i < 50; i++)
+  for(int i = 0; i < 25; i++)
   {
-    for(int j = 0; j < 3; j++)
+    for(int j = 0; j < 6; j++)
     {
-      Particle p = phys.makeParticle(1.0, width/4 + j*width/4, 10, 0);
-      float velX = random(-40, 40);
-      float velY = random(2, 20);
+      float x = random(100, width - 100);
+      float y = random(100, height - 100);
+      Particle p = phys.makeParticle(1.0, x, y, 0);
+      float velX = random(-20, 20);
+      float velY = random(-20, 20);
       p.velocity().set(velX, velY, 0);
       float lifeTime = random(1, 4);
       Confetti c = new Confetti(p, lifeTime);
@@ -95,8 +97,20 @@ class Confetti
   {
     noStroke();
     float a = map(lifeTime, 0, totalLifeTime, 0, 255);
+    // do five ghosly bits, randomly spaced around the central position
+    for(int i = 0;  i < 5; i++)
+    {
+      // be less transparent than the actual flying piece
+      float transScale = map(i, 0, 5, 0.5, 0.1);
+      fill(255, a*transScale);
+      float dirStep = 2 + i*3;
+      float x = p.position().x() + random(-5, 5);
+      float y = p.position().y() + random(-5, 5);
+      rect(x, y, 2, 2);
+    }
+    // draw the main bit.
     fill(shade, a);
-    float sz = map(shade, darkShade, 255, 2, 6);
+    float sz = map(shade, darkShade, 255, 1, 3);
     rect(p.position().x(), p.position().y(), sz, sz);
   }
   

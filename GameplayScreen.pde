@@ -160,7 +160,7 @@ class GameplayScreen extends GameScreen
     successfulTricks++;
     triggerParticleEffect();
     applause.trigger();
-    confetti.trigger();
+    // confetti.trigger();
   }
   
   void keyPressed()
