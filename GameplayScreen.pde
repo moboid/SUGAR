@@ -158,7 +158,9 @@ class GameplayScreen extends GameScreen
   void awardPoint()
   {
     successfulTricks++;
-    // TODO "sparkle" effect.
+    triggerParticleEffect();
+    applause.trigger();
+    confetti.trigger();
   }
   
   void keyPressed()

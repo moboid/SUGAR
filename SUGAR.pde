@@ -18,6 +18,8 @@ PImage SUGAR_BROWN;
 
 Minim minim;
 AudioPlayer polka1;
+AudioSample applause;
+AudioSample confetti;
 
 // how many trick opportunities are in one preparation period
 int PREPARE_TRICK_WINDOWS = 5;
@@ -54,7 +56,9 @@ void setup()
   sugarFont = loadFont("BookmanOldStyle-Italic-48.vlw");
   
   minim = new Minim(this);
-  polka1 = minim.loadFile("sugar_polka_01.mp3");
+  polka1 = minim.loadFile("sugar_polka_01.mp3", 2048);
+  applause = minim.loadSample("applause.wav");
+  confetti = minim.loadSample("confetti_pop.wav");
   
   // load all the animations
   loadAnimations();
@@ -79,6 +83,9 @@ void setup()
   currentGameScreen = TITLE_SCREEN;
   currentGameScreen.enter();
   
+  // setup the particle effect
+  setupParticleEffect();
+  
   // initialize the timer we use to figure out frame dt
   lastFrameStartTime = millis();
 }
@@ -101,12 +108,21 @@ void draw()
   
   // update the currentGameScreen
   currentGameScreen.draw( timeSinceLastFrame );
+  
+  updateParticleEffect( timeSinceLastFrame );
+  
+  drawParticleEffect();
 }
 
 void keyPressed()
 {
   //println("User pressed " + key);
   currentGameScreen.keyPressed();
+  
+  if ( key == 't' )
+  {
+    triggerParticleEffect();
+  }
 }
 
 void keyReleased()
