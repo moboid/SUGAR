@@ -27,10 +27,10 @@ class GameplayScreen extends GameScreen
   GameplayScreen()
   {  
     horseP1 = new Horse('a');
-    horseP1.setScale(0.3);
+    horseP1.setScale(0.25);
     
     horseP2 = new Horse('j');
-    horseP2.setScale(0.3);
+    horseP2.setScale(0.25);
     
     horseP1.setOtherHorse(horseP2);
     horseP2.setOtherHorse(horseP1);
@@ -42,13 +42,13 @@ class GameplayScreen extends GameScreen
   {
     textFont(gameplayFont);
     textAlign(LEFT);
-    shapeMode(CENTER);
+    shapeMode(CORNER);
     rectMode(CENTER);
     
     markerPositions.clear();
     
     // let's generate 6 random markers. evenly spaced on y, but with some random x offsets.
-    int ystart = height - 100;
+    int ystart = height - 50;
     for(int i = 0; i < 6; i++)
     {
       PVector marker = new PVector( random(100, 400), ystart - i*120 );
@@ -68,11 +68,13 @@ class GameplayScreen extends GameScreen
     tricksToWin = 4;
     
     polka1.play(0);
+    polka1.setGain(-6);
   }
   
   void exit()
   {
-    polka.pause();
+    //polka1.pause();
+    polka1.shiftGain(-6, -60, 2000);
   }
   
   void draw(float dt)
@@ -85,15 +87,26 @@ class GameplayScreen extends GameScreen
     background(SUGAR_BROWN);
     
     textSize(16);
+    fill(255);
     text("Tricks Performed: " + successfulTricks + " / " + tricksToWin, 10, 20);
     
     // draw the markers
     for(int i = 0; i < markerPositions.size(); i++)
     {
       PVector pos = (PVector)markerPositions.get(i);
-      fill(0);
-      rect(width/2 - pos.x, pos.y, 15, 15);
-      rect(width/2 + pos.x, pos.y, 15, 15);
+      if ( i == currentMarker )
+      {
+        fill(0);
+        stroke(255, 128);
+      }
+      else
+      {
+        stroke(0);
+        fill(0, 128);  
+      }
+      float rectSize = 10;
+      rect(width/2 - pos.x, pos.y, rectSize, rectSize);
+      rect(width/2 + pos.x, pos.y, rectSize, rectSize);
     }
     
     // draw the horsies!

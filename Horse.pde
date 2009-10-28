@@ -52,11 +52,18 @@ class Horse
   // ****************************
   // ** PREPARING STATE VARIABLES
   
-  // how long the preparing state can last before it "times out"
-  private float PREPARE_TIME_LIMIT = 5;
+  // the counter to track how many trick windows we've had
+  private int   m_trickWindowCount;
   
-  // the window of time we consider "simultaneous"
-  private float TRICK_WINDOW = 0.3f;
+  // how long the trick window should be
+  // the length of time between trick windows will be 90% of this value.
+  private float m_trickWindow;
+  
+  // timer to keep track of the trick window
+  private float m_trickWindowTimer;
+  
+  // timer to keep track of time between trick windows
+  private float m_trickRestTimer;
   
   // what key on the keyboard we respond to
   private char  m_button;
@@ -88,6 +95,10 @@ class Horse
   
   void setState(int nextState)
   {
+    // disable these.
+    m_trickWindowTimer = -1;
+    m_trickRestTimer = -1;
+    
     switch(nextState)
     {
       case WAITING:
@@ -98,6 +109,13 @@ class Horse
         break;
       case PREPARING:
         m_currentAnimation = getAnimationInstance("preparing");
+        m_trickWindowCount = 0;
+        // choose a trick window length
+        m_trickWindow = TRICK_WINDOW + random(-TRICK_WINDOW_VARIANCE, TRICK_WINDOW_VARIANCE);
+        // starting this at 0 means we'll start with a trick window
+        m_trickWindowTimer = 0;
+        // starting this at -1 means we won't touch it.
+        m_trickRestTimer = -1;
         break;
       case PERFORMING:
         m_currentAnimation = getAnimationInstance(nextTrick);
@@ -213,13 +231,45 @@ class Horse
   
   private void preparingState(float dt)
   {
-    if ( timeInState() > PREPARE_TIME_LIMIT )
+    // first check out the other horse
+    int otherState = m_otherHorse.getState();
+    // if the other horse is waiting, that means they did a trick already
+    // so we should just continue on if that's the case
+    if ( otherState == WAITING )
     {
-      int otherState = m_otherHorse.getState();
-      if ( otherState == WAITING || otherState == PREPARING )
+      GAMEPLAY_SCREEN.letsGo();
+    }
+    
+    // trick timer or no?
+    if ( m_trickWindowTimer >= 0 )
+    {
+      m_trickWindowTimer += dt;
+      if ( m_trickWindowTimer >= m_trickWindow )
+      {
+        m_trickWindowTimer = -1;
+        m_trickRestTimer = 0;
+      }
+    }
+    else if ( m_trickRestTimer >= 0 )
+    {
+      m_trickRestTimer += dt;
+      if ( m_trickRestTimer >= m_trickWindow * REST_WINDOW_SCALE )
+      {
+        m_trickRestTimer = -1;
+        m_trickWindowTimer = 0;
+        m_trickWindowCount++;
+      }
+    }
+    
+    // if we're all out of windows we need to check out the other horse.
+    if ( m_trickWindowCount == PREPARE_TRICK_WINDOWS )
+    {
+      // if they are still preparing we'll force them to bail so we can continue.
+      if ( otherState == PREPARING )
       {
         GAMEPLAY_SCREEN.letsGo();        
       }
+      // if they are performing, we'll wait for them to finish.
       else if ( otherState == PERFORMING )
       {
         setState(WAITING);
@@ -229,24 +279,34 @@ class Horse
   
   void keyPressed()
   {
+    // only respond if we are in the correct state and in a trick window
     if ( key == m_button )
     {
-      int otherState = m_otherHorse.getState();
-      if ( otherState == PREPARING )
+      println("Horse " + m_button + " is responding.");
+      if ( m_state == PREPARING && m_trickWindowTimer >= 0 )
       {
+        println("Horse " + m_button + " gonna perform.");
         setState(PERFORMING);
+        int otherState = m_otherHorse.getState();
+        if ( otherState == PERFORMING )
+        {
+          float t = m_otherHorse.timeInState();
+          println("Other horse has been performing for " + t + " seconds.");
+          if ( t <= SIMULTANEOUS_WINDOW )
+          {
+            println("****** POINT!");
+            GAMEPLAY_SCREEN.awardPoint();
+          }
+          else
+          {
+            println("****** NOT SIMULTANEOUS! No trick!");
+            setState(WAITING);
+          }
+        }
       }
-      else if ( otherState == PERFORMING )
+      else
       {
-        if ( m_otherHorse.timeInState() < TRICK_WINDOW )
-        {
-          GAMEPLAY_SCREEN.awardPoint();
-          setState(PERFORMING);
-        }
-        else
-        {
-          setState(WAITING);
-        }
+        println("Horse " + m_button + " couldn't perform because current state is " + m_state + " and the trick window timer is " + m_trickWindowTimer);
       }
     }
   }
@@ -281,9 +341,10 @@ class Horse
       m_currentAnimation.draw();
     popMatrix();
     
-    if ( m_state == PREPARING )
+    // only draw the box if we are in a trick window
+    if ( m_state == PREPARING && m_trickWindowTimer >= 0 )
     {
-      float timerYOff = 75;
+      float timerYOff = 25;
       // timer outline
       noFill();
       stroke(0);
@@ -291,7 +352,7 @@ class Horse
       
       // timer fill
       fill(0);
-      float rectWidth = map(timeInState(), 0, PREPARE_TIME_LIMIT, 0, 100);
+      float rectWidth = map(m_trickWindowTimer, 0, m_trickWindow, 0, 100);
       rect(m_screenPos.x, m_screenPos.y + timerYOff, rectWidth, 10);
       
     }
@@ -316,7 +377,7 @@ class Horse
     m_walkDirection.set( x - m_screenPos.x, y - m_screenPos.y, 0 );
     m_walkDirection.normalize();
     // randomly choose a speed
-    m_walkSpeed = random(15, 25);
+    m_walkSpeed = random(SLOW_WALK_SPEED, FAST_WALK_SPEED);
     
     nextTrick = trickToPerform;
     

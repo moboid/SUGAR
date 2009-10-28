@@ -98,7 +98,7 @@ class Animation
   void drawFrame(int frameNumber)
   {
     PShape frame = (PShape)m_frames.get(frameNumber);
-    shape(frame);
+    shape(frame, -frame.width/2, -frame.height);
   }
   
   // figures out which frame to draw based on the time passed in.
