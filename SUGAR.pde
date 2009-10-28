@@ -11,13 +11,15 @@
 // a general font to be used by everyone, for now
 PFont sugarFont;
 // the brown color we will use for a background
-color SUGAR_BROWN = color(70, 40, 0);
+//color SUGAR_BROWN = color(70, 40, 0);
+PImage SUGAR_BROWN;
   
 void setup()
 {
-  size(800, 600);
+  size(1024, 768);
   smooth();
   
+  SUGAR_BROWN = loadImage("SUGAR_BACKGROUND.jpg");
   sugarFont = loadFont("BookmanOldStyle-Italic-48.vlw");
   
   // load all the animations

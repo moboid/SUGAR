@@ -13,29 +13,59 @@ class GameplayScreen extends GameScreen
   Horse horseP1;
   Horse horseP2;
   
+  int successfulTricks;
+  int tricksToWin;
+  
+  // marker positions are vectors whose y component is an absolute screen position
+  // and whose x component is an offset from the center. the markers for horseP1
+  // will offset to the left and horseP2 will offset to the right
+  ArrayList markerPositions;
+  
+  // the marker the horses are walking to
+  int       currentMarker;
+  
   GameplayScreen()
   {  
-    horseP1 = new Horse();
-    horseP2 = new Horse();
+    horseP1 = new Horse('a');
+    horseP1.setScale(0.3);
+    
+    horseP2 = new Horse('j');
+    horseP2.setScale(0.3);
+    
+    horseP1.setOtherHorse(horseP2);
+    horseP2.setOtherHorse(horseP1);
+    
+    markerPositions = new ArrayList();
   }
   
   void enter()
   {
     textFont(gameplayFont);
-    textAlign(CENTER);
+    textAlign(LEFT);
     shapeMode(CENTER);
+    rectMode(CENTER);
+    
+    markerPositions.clear();
+    
+    // let's generate 6 random markers. evenly spaced on y, but with some random x offsets.
+    int ystart = height - 100;
+    for(int i = 0; i < 6; i++)
+    {
+      PVector marker = new PVector( random(100, 400), ystart - i*120 );
+      markerPositions.add(marker);
+    }
+    
+    currentMarker = -1;
     
     // initial state for our horses
-    horseP1.setAnimation("prance");
-    horseP1.setPosition(0, height);
-    horseP1.pranceTo(width/3, height/2);
-    horseP1.setScale(0.3);
-    
-    horseP2.setAnimation("prance");
-    horseP2.setAnimationSpeed(2);    
+    horseP1.setPosition(0, height);      
     horseP2.setPosition(width, height);
-    horseP2.pranceTo(2*width/3, height/2);
-    horseP2.setScale(0.3);
+
+    // to the first marker!
+    letsGo();
+    
+    successfulTricks = 0;
+    tricksToWin = 4;
   }
   
   void draw(float dt)
@@ -47,14 +77,74 @@ class GameplayScreen extends GameScreen
     // draw stuff
     background(SUGAR_BROWN);
     
-    textSize(24);
-    text("Gameplay will happen here.", width/2, 100);
+    textSize(16);
+    text("Tricks Performed: " + successfulTricks + " / " + tricksToWin, 10, 20);
+    
+    // draw the markers
+    for(int i = 0; i < markerPositions.size(); i++)
+    {
+      PVector pos = (PVector)markerPositions.get(i);
+      fill(0);
+      rect(width/2 - pos.x, pos.y, 15, 15);
+      rect(width/2 + pos.x, pos.y, 15, 15);
+    }
     
     // draw the horsies!
     horseP1.draw();
     horseP2.draw();
-    
-    // TODO go to win or lose after time is up
   }  
+  
+  void letsGo()
+  {
+    currentMarker++;
+    
+    if ( currentMarker < markerPositions.size() )
+    {
+      float trickPercent = random(0, 1);
+      String nextTrick = "";
+      if ( trickPercent < 0.3 )
+      {
+        nextTrick = "levade";
+      }
+      else if ( trickPercent < 0.6 )
+      {
+        nextTrick = "courbette";
+      }
+      else
+      {
+        nextTrick = "capriole";
+      }
+      
+      PVector nextPos = (PVector)markerPositions.get(currentMarker);
+      
+      horseP1.pranceTo( width/2 - nextPos.x, nextPos.y, nextTrick );
+      horseP2.pranceTo( width/2 + nextPos.x, nextPos.y, nextTrick );
+      
+    }
+    else // no more markers, we're done!
+    {
+      if ( successfulTricks >= tricksToWin )
+      {
+        SwitchToScreen(WIN_SCREEN);
+      }
+      else
+      {
+        SwitchToScreen(LOSE_SCREEN);
+      }
+    }
+    
+  }
+  
+  void awardPoint()
+  {
+    successfulTricks++;
+    // TODO "sparkle" effect.
+  }
+  
+  void keyPressed()
+  {
+    horseP1.keyPressed();
+    horseP2.keyPressed();
+  }
 }
 

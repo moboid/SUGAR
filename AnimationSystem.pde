@@ -86,6 +86,15 @@ class Animation
     return m_fps;
   }
   
+  int frameForTime(float time)
+  {
+    float frameFraction = map(time, 0, m_animLength, 0, this.frameCount());
+    // println("frameFraction is " + frameFraction);
+    int frameNumber = floor(frameFraction) % this.frameCount();
+    // println("Drawing frame " + frameNumber);
+    return frameNumber;
+  }
+  
   void drawFrame(int frameNumber)
   {
     PShape frame = (PShape)m_frames.get(frameNumber);
@@ -95,11 +104,7 @@ class Animation
   // figures out which frame to draw based on the time passed in.
   void drawFrame(float atTime)
   {
-    float frameFraction = map(atTime, 0, m_animLength, 0, this.frameCount());
-    // println("frameFraction is " + frameFraction);
-    int frameNumber = floor(frameFraction) % this.frameCount();
-    // println("Drawing frame " + frameNumber);
-    drawFrame(frameNumber);
+    drawFrame( frameForTime(atTime) );
   }
 }
 
@@ -124,17 +129,28 @@ class AnimationInstance
     m_currentTime = 0;
   }
   
+  int currentFrame()
+  {
+    return m_animation.frameForTime(m_currentTime);
+  }
+  
   void setTimeScale(float timeScale)
   {
     m_timeScale = timeScale;
   }
   
   // advance the animation by dt seconds
-  void advance(float dt)
+  // returns true if this advance caused the anim to loop
+  boolean advance(float dt)
   {
     // advance our time.
     m_currentTime += dt*m_timeScale;
-    m_currentTime %= m_animation.length();  
+    if ( m_currentTime > m_animation.length() )
+    {
+      m_currentTime %= m_animation.length();  
+      return true;
+    }
+    return false;
   }
   
   // display the animation frame

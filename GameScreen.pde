@@ -25,7 +25,7 @@ class GameScreen
 // wants the game to switch to a different game screen.
 GameScreen TITLE_SCREEN;
 GameScreen INSTRUCTION_SCREEN;
-GameScreen GAMEPLAY_SCREEN;
+GameplayScreen GAMEPLAY_SCREEN;
 GameScreen WIN_SCREEN;
 GameScreen LOSE_SCREEN;
 

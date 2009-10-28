@@ -34,12 +34,24 @@
 
 	<animation name="courbette" fps="1">
 		<!-- TODO update with real graphics -->
-		<frame>HORSE_PRANCE_01.svg</frame>
+		<frame>HORSE_LEVADE_01.svg</frame>
+		<frame>HORSE_LEVADE_02.svg</frame>
+		<frame>HORSE_LEVADE_03.svg</frame>
+		<frame>HORSE_LEVADE_03.svg</frame>
+		<frame>HORSE_LEVADE_03.svg</frame>
+		<frame>HORSE_LEVADE_03.svg</frame>
+		<frame>HORSE_LEVADE_02.svg</frame>
 	</animation>
 
 	<animation name="capriole" fps="1">
 		<!-- TODO update with real graphics -->
-		<frame>HORSE_PRANCE_01.svg</frame>
+		<frame>HORSE_LEVADE_01.svg</frame>
+		<frame>HORSE_LEVADE_02.svg</frame>
+		<frame>HORSE_LEVADE_03.svg</frame>
+		<frame>HORSE_LEVADE_03.svg</frame>
+		<frame>HORSE_LEVADE_03.svg</frame>
+		<frame>HORSE_LEVADE_03.svg</frame>
+		<frame>HORSE_LEVADE_02.svg</frame>
 	</animation>
 
 </AnimationData>
