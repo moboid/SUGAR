@@ -23,7 +23,7 @@ AudioPlayer polka1;
 int PREPARE_TRICK_WINDOWS = 5;
 
 // how long a trick window lasts.
-float TRICK_WINDOW = 0.5f;
+float TRICK_WINDOW = 0.8f;
 
 // how much the length of the trick windows for a given trick
 // can vary. this is used to figure out the actual trick window
@@ -32,11 +32,11 @@ float TRICK_WINDOW_VARIANCE = 0.1f;
 
 // how much the trick window length will be scaled to be used for
 // the rest window length
-float REST_WINDOW_SCALE = 0.65f;
+float REST_WINDOW_SCALE = 0.60f;
 
 // how close together the two button presses must be for 
 // two tricks to count as simultaneous
-float SIMULTANEOUS_WINDOW = 0.1f;
+float SIMULTANEOUS_WINDOW = 0.2f;
 
 // the slowest a horse will walk. this is units per second.
 float SLOW_WALK_SPEED = 30;
@@ -48,6 +48,7 @@ void setup()
 {
   size(1024, 768);
   smooth();
+  noCursor();
   
   SUGAR_BROWN = loadImage("SUGAR_BACKGROUND.jpg");
   sugarFont = loadFont("BookmanOldStyle-Italic-48.vlw");
