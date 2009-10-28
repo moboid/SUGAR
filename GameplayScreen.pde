@@ -66,6 +66,13 @@ class GameplayScreen extends GameScreen
     
     successfulTricks = 0;
     tricksToWin = 4;
+    
+    polka1.play(0);
+  }
+  
+  void exit()
+  {
+    polka.pause();
   }
   
   void draw(float dt)

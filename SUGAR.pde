@@ -7,12 +7,17 @@
   * Art: Leonie Smelt
   * TODO: any additional credits
   */
+
+import ddf.minim.*;
   
 // a general font to be used by everyone, for now
 PFont sugarFont;
 // the brown color we will use for a background
 //color SUGAR_BROWN = color(70, 40, 0);
 PImage SUGAR_BROWN;
+
+Minim minim;
+AudioPlayer polka1;
   
 void setup()
 {
@@ -21,6 +26,9 @@ void setup()
   
   SUGAR_BROWN = loadImage("SUGAR_BACKGROUND.jpg");
   sugarFont = loadFont("BookmanOldStyle-Italic-48.vlw");
+  
+  minim = new Minim(this);
+  polka1 = minim.loadFile("sugar_polka_01.mp3");
   
   // load all the animations
   loadAnimations();
@@ -77,4 +85,12 @@ void keyPressed()
 void keyReleased()
 {
   currentGameScreen.keyReleased();
+}
+
+void stop()
+{
+  polka1.close();
+  minim.stop();
+  
+  super.stop();
 }
