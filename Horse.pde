@@ -248,6 +248,12 @@ class Horse
       {
         m_trickWindowTimer = -1;
         m_trickRestTimer = 0;
+        // when the trick window ends, we should see if the other horse is performing
+        // if it is, that means we missed our chance for doing a simultaneous trick
+        if ( otherState == PERFORMING )
+        {
+          setState(WAITING);
+        }
       }
     }
     else if ( m_trickRestTimer >= 0 )
@@ -258,6 +264,11 @@ class Horse
         m_trickRestTimer = -1;
         m_trickWindowTimer = 0;
         m_trickWindowCount++;
+      }
+      // if we're between trick windows and the other horse is performing, we go to waiting
+      if ( otherState == PERFORMING )
+      {
+        setState(WAITING);
       }
     }
     
@@ -346,12 +357,13 @@ class Horse
     {
       float timerYOff = 25;
       // timer outline
+      float a = map(m_trickWindowTimer, 0, m_trickWindow, 255, 0);
       noFill();
-      stroke(0);
+      stroke(0, a);
       rect(m_screenPos.x, m_screenPos.y + timerYOff, 100, 10);
       
       // timer fill
-      fill(0);
+      fill(0, a);
       float rectWidth = map(m_trickWindowTimer, 0, m_trickWindow, 0, 100);
       rect(m_screenPos.x, m_screenPos.y + timerYOff, rectWidth, 10);
       
