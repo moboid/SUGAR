@@ -48,6 +48,10 @@ float SLOW_WALK_SPEED = 30;
 // the fastest a horse will walk. this is units per second.
 float FAST_WALK_SPEED = 45;
 
+// the percent chance that a horse will poop when it fails to
+// simultaneously perform a trick with its partner.
+float POOP_CHANCE = 0.65;
+
 void setup()
 {
   size(1024, 768);

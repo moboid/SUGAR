@@ -16,6 +16,9 @@ class Horse
   // what animation am I currently in?
   private AnimationInstance m_currentAnimation;
   
+  // all the poops I am managing
+  ArrayList poops;
+  
   // where on the screen am I?
   private PVector m_screenPos;   
   
@@ -76,6 +79,8 @@ class Horse
   // next trick to perform
   private String nextTrick;
   
+  boolean performed;
+  
   // *****************************
   // ** METHODS
   
@@ -88,6 +93,8 @@ class Horse
     m_accumPos = new PVector();
     m_scale = 1;
     m_button = button;
+    poops = new ArrayList();
+    performed = false;
   }
   
   void setOtherHorse(Horse h)
@@ -121,6 +128,7 @@ class Horse
         break;
       case PERFORMING:
         m_currentAnimation = getAnimationInstance(nextTrick);
+        performed = true;
         break;
     }
     
@@ -163,6 +171,12 @@ class Horse
       case PERFORMING:
         performingState(dt, looped);
         break;
+    }
+    
+    for(int i = 0; i < poops.size(); i++)
+    {
+      Poop p = (Poop)poops.get(i);
+      p.update(dt);
     }
   }
   
@@ -349,6 +363,12 @@ class Horse
       m_currentAnimation.draw();
     popMatrix();
     
+    for(int i = 0; i < poops.size(); i++)
+    {
+      Poop p = (Poop)poops.get(i);
+      p.draw();
+    }
+    
     // only draw the box if we are in a trick window
     if ( m_state == PREPARING && m_trickWindowTimer >= 0 )
     {
@@ -400,6 +420,14 @@ class Horse
     
     // transition to the walking state.
     setState(WALKING);
+  }
+  
+  void poop()
+  {
+    println("Horse " + m_button + " pooped!");
+    PVector startAt = new PVector(m_screenPos.x + 20*m_xScale, m_screenPos.y - 40);
+    PVector landAt = new PVector(m_screenPos.x + 30*m_xScale, m_screenPos.y);
+    poops.add( new Poop(startAt, landAt) );    
   }
   
   // slams the position to the indicated position
