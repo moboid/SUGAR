@@ -90,20 +90,12 @@ class GameplayScreen extends GameScreen
     fill(255);
     text("Tricks Performed: " + successfulTricks + " / " + tricksToWin, 10, 20);
     
-    // draw the markers
-    for(int i = 0; i < markerPositions.size(); i++)
+    // draw the active marker
+    if ( currentMarker < markerPositions.size() )
     {
-      PVector pos = (PVector)markerPositions.get(i);
-      if ( i == currentMarker )
-      {
-        fill(0);
-        stroke(255, 128);
-      }
-      else
-      {
-        stroke(0);
-        fill(0, 128);  
-      }
+      PVector pos = (PVector)markerPositions.get(currentMarker);
+      stroke(255, 128);
+      fill(0);
       float rectSize = 10;
       rect(width/2 - pos.x, pos.y, rectSize, rectSize);
       rect(width/2 + pos.x, pos.y, rectSize, rectSize);

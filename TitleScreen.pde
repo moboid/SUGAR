@@ -1,13 +1,13 @@
 // These are all assets used by the TitleScreen that only need to be loaded once.
 PFont titleFont;
-PShape titleArt;
+AnimationInstance titleArt;
 
 // load all of our assets for the title screen.
 // this is called from setup() in SUGAR
 void setupTitleScreen()
 {
   titleFont = sugarFont;
-  titleArt =  loadShape("HORSE_PRANCE_01.svg");
+  titleArt =  getAnimationInstance("walking");
 }
 
 // A class to do all of our TitleScreen stuff
@@ -17,7 +17,7 @@ class TitleScreen extends GameScreen
   {
     textFont(titleFont);
     textAlign(CENTER);
-    shapeMode(CENTER);
+    shapeMode(CORNER);
   }
   
   void draw(float dt)
@@ -30,7 +30,12 @@ class TitleScreen extends GameScreen
     text("SUGAR", width/2, 100);
     
     // the art
-    shape(titleArt, width/2, height/2 - 80, 200, 200);
+    titleArt.advance(dt);
+    pushMatrix();
+    translate(width/2, height/2);
+    scale(0.5);
+    titleArt.draw();
+    popMatrix();
     
     // who made it?
     textSize(24);
@@ -44,6 +49,21 @@ class TitleScreen extends GameScreen
   
   void keyReleased()
   {
-    SwitchToScreen(INSTRUCTION_SCREEN);
+    if ( key == 'L' )
+    {
+      titleArt = getAnimationInstance("levade");
+    }
+    else if ( key == 'C' )
+    {
+      titleArt = getAnimationInstance("courbette");
+    }
+    else if ( key == 'P' )
+    {
+      titleArt = getAnimationInstance("capriole");
+    }
+    else if ( key != CODED )
+    {
+      SwitchToScreen(INSTRUCTION_SCREEN);
+    }
   }
 }
