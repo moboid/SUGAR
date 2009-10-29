@@ -50,7 +50,7 @@ float FAST_WALK_SPEED = 45;
 
 // the percent chance that a horse will poop when it fails to
 // simultaneously perform a trick with its partner.
-float POOP_CHANCE = 0.65;
+float POOP_CHANCE = 1;
 
 void setup()
 {
@@ -59,7 +59,7 @@ void setup()
   noCursor();
 
   SUGAR_BROWN = loadImage("SUGAR_BACKGROUND.jpg");
-  sugarFont = loadFont("BookmanOldStyle-Italic-48.vlw");
+  sugarFont = loadFont("TitleFont.vlw");
 
   minim = new Minim(this);
   introMusic = minim.loadSnippet("sugar_intro.wav");
