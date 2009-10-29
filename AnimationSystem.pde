@@ -2,11 +2,15 @@
 
 // all the defined animations, which we can find by name.
 HashMap animations;
+// all of the animation frames we've encountered
+// so that we don't load a graphic twice.
+HashMap shapes;
 
 // loads all the animations defined in animations.xml into Animation objects
 void loadAnimations()
 {
   animations = new HashMap(); 
+  shapes = new HashMap();
   XMLElement anims = new XMLElement(this, "animations.xml");
   int numAnims = anims.getChildCount();
   for(int i = 0; i < numAnims; i++)
@@ -26,8 +30,7 @@ void loadAnimations()
         if ( frameXML.getName().equals("frame") )
         {
           String frameFileName = frameXML.getContent();
-          println("--- loading frame " + frameFileName);
-          PShape frame = loadShape(frameFileName);
+          PShape frame = loadAnimationFrame(frameFileName);
           anim.addFrame(frame);
         }
       }
@@ -35,6 +38,21 @@ void loadAnimations()
       animations.put(name, anim);
     }
   }
+}
+
+// looks for the file in our list of already loaded frames.
+// returns that if it finds it, otherwise pulls from disk.
+PShape loadAnimationFrame(String frameFileName)
+{
+  if ( shapes.containsKey(frameFileName) == false )
+  {
+    println("--- loading frame " + frameFileName + " from disk");
+    PShape frame = loadShape(frameFileName);
+    shapes.put(frameFileName, frame);
+    return frame;
+  }
+  println("--- returning frame " + frameFileName + " from the cache");
+  return (PShape)shapes.get(frameFileName);
 }
 
 // helper function to get an instance of an animation
