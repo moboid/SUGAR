@@ -46,15 +46,15 @@
 		
 	</animation>
 
-	<animation name="capriole" fps="1">
+	<animation name="capriole" fps="4">
 		<!-- TODO update with real graphics -->
-		<frame>HORSE_LEVADE_01.svg</frame>
-		<frame>HORSE_LEVADE_02.svg</frame>
-		<frame>HORSE_LEVADE_03.svg</frame>
-		<frame>HORSE_LEVADE_03.svg</frame>
-		<frame>HORSE_LEVADE_03.svg</frame>
-		<frame>HORSE_LEVADE_03.svg</frame>
-		<frame>HORSE_LEVADE_02.svg</frame>
+		<frame>HORSE_CAPRIOLE_01.svg</frame>
+		<frame>HORSE_CAPRIOLE_02.svg</frame>
+		<frame>HORSE_CAPRIOLE_01.svg</frame>
+		<frame>HORSE_CAPRIOLE_02.svg</frame>
+		<frame>HORSE_CAPRIOLE_03.svg</frame>
+		<frame>HORSE_CAPRIOLE_04.svg</frame>
+		<frame>HORSE_CAPRIOLE_01.svg</frame>
 	</animation>
 
     <!-- for testing frame rates lower than 1 -->
