@@ -70,8 +70,8 @@ class Horse
   // timer to keep track of time between trick windows
   private float m_trickRestTimer;
   
-  // what key on the keyboard we respond to
-  private char  m_button;
+  // what keys on the keyboard we respond to
+  private char[]  m_buttons;
   
   // ****************************
   // ** PERFORMING STATE VARIABLES
@@ -84,7 +84,7 @@ class Horse
   // *****************************
   // ** METHODS
   
-  Horse(char button)
+  Horse(char[] buttons)
   {
     m_currentAnimation = getAnimationInstance("walking");
     m_screenPos = new PVector(width/2, height/2);
@@ -92,7 +92,7 @@ class Horse
     m_walkDirection = new PVector();
     m_accumPos = new PVector();
     m_scale = 1;
-    m_button = button;
+    m_buttons = buttons;
     poops = new ArrayList();
     performed = false;
   }
@@ -307,12 +307,12 @@ class Horse
   void keyPressed()
   {
     // only respond if we are in the correct state and in a trick window
-    if ( key == m_button )
+    if ( key == m_buttons[0] || key == m_buttons[1] )
     {
-      println("Horse " + m_button + " is responding.");
+      println("Horse " + m_buttons[0] + " is responding.");
       if ( m_state == PREPARING && m_trickWindowTimer >= 0 )
       {
-        println("Horse " + m_button + " gonna perform.");
+        println("Horse " + m_buttons[0] + " gonna perform.");
         setState(PERFORMING);
         int otherState = m_otherHorse.getState();
         if ( otherState == PERFORMING )
@@ -333,7 +333,7 @@ class Horse
       }
       else
       {
-        println("Horse " + m_button + " couldn't perform because current state is " + m_state + " and the trick window timer is " + m_trickWindowTimer);
+        println("Horse " + m_buttons[0] + " couldn't perform because current state is " + m_state + " and the trick window timer is " + m_trickWindowTimer);
       }
     }
   }
@@ -424,7 +424,7 @@ class Horse
   
   void poop()
   {
-    println("Horse " + m_button + " pooped!");
+    println("Horse " + m_buttons[0] + " pooped!");
     PVector startAt = new PVector(m_screenPos.x + 20*m_xScale, m_screenPos.y - 40);
     PVector landAt = new PVector(m_screenPos.x + 30*m_xScale, m_screenPos.y);
     poops.add( new Poop(startAt, landAt) );    
