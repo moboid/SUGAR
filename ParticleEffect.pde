@@ -22,10 +22,10 @@ void updateParticleEffect(float dt)
   
   if ( emitParticles )
   {
-      for(int i = 0; i < 10; i++)
+      for(int i = 0; i < 20; i++)
       {
-        float x = random(100, width - 100);
-        float y = random(100, height - 100);
+        float x = random(0, width);
+        float y = random(0, height);
         Particle p = phys.makeParticle(1.0, x, y, 0);
         float velX = random(-20, 20);
         float velY = random(-20, 20);
@@ -35,7 +35,7 @@ void updateParticleEffect(float dt)
         confettiBits.add(c);
         totalEmitted++;
       }
-      if ( totalEmitted >= 200 )
+      if ( totalEmitted >= 400 )
       {
         emitParticles = false;
       }    
@@ -134,27 +134,27 @@ class Confetti
   {
     noStroke();
     float a = map(lifeTime, 0, totalLifeTime, 0, 255);
-//    // draw some ghostly trails back in the direction we came from
-//    PVector dir = new PVector( -p.velocity().x(), -p.velocity().y() );
-//    dir.normalize();
-//    // do five ghosly bits, randomly spaced around the central position
-//    int numBits = 12;
-//    for(int i = 0;  i < 12; i++)
-//    {
-//      // be less transparent than the actual flying piece
-//      float transScale = map(i, 0, numBits, 0.5, 0.1);
-//      fill(255, a*transScale);
-//      float x = p.position().x() + random(0, 5)*positiveOrNegative();
-//      float y = p.position().y() + random(0, 5)*positiveOrNegative();
-//      // uncomment for sperms.
-//      //float dirStep = 2 + i*3;
-//      //float x = p.position().x() + dir.x*dirStep;
-//      //float y = p.position().y() + dir.y*dirStep;
-//      rect(x, y, 2, 2);
-//    }
+    float sz = map(shade, darkShade, 255, 1, 3);
+    // draw some ghostly trails back in the direction we came from
+    PVector dir = new PVector( -p.velocity().x(), -p.velocity().y() );
+    dir.normalize();
+    // do five ghosly bits, randomly spaced around the central position
+    int numBits = 6;
+    for(int i = 0;  i < numBits; i++)
+    {
+      // be less transparent than the actual flying piece
+      //float transScale = map(i, 0, numBits, 0.5, 0.1);
+      fill(shade, a*0.3);
+      float x = p.position().x() + random(5, 10)*positiveOrNegative();
+      float y = p.position().y() + random(5, 10)*positiveOrNegative();
+      // uncomment for sperms.
+      //float dirStep = 2 + i*3;
+      //float x = p.position().x() + dir.x*dirStep;
+      //float y = p.position().y() + dir.y*dirStep;
+      rect(x, y, sz, sz);
+    }
     // draw the main bit.
     fill(shade, a);
-    float sz = map(shade, darkShade, 255, 1, 3);
     rect(p.position().x(), p.position().y(), sz, sz);
   }
   
