@@ -26,10 +26,10 @@ class GameplayScreen extends GameScreen
   
   GameplayScreen()
   {  
-    horseP1 = new Horse('a');
+    horseP1 = new Horse( new char[] { 'a', 'A' } );
     horseP1.setScale(0.25);
     
-    horseP2 = new Horse('j');
+    horseP2 = new Horse( new char[] { 'l', 'L' } );
     horseP2.setScale(0.25);
     
     horseP1.setOtherHorse(horseP2);
@@ -92,9 +92,9 @@ class GameplayScreen extends GameScreen
     // draw stuff
     background(SUGAR_BROWN);
     
-    textSize(16);
+    textSize(32);
     fill(255);
-    text("Tricks Performed: " + successfulTricks + " / " + tricksToWin, 10, 20);
+    text("Tricks Performed: " + successfulTricks + " / " + tricksToWin, 5, 30);
     
     // draw the active marker
     if ( currentMarker < markerPositions.size() )
@@ -170,8 +170,8 @@ class GameplayScreen extends GameScreen
   {
     successfulTricks++;
     triggerParticleEffect();
-    applause.trigger();
-    // confetti.trigger();
+    //applause.trigger();
+    confetti.trigger();
   }
   
   void keyPressed()

@@ -41,7 +41,7 @@ class TitleScreen extends GameScreen
     popMatrix();
     
     // who made it?
-    textSize(24);
+    textSize(32);
     text("Design: Heather Kelley", width/2, height/2 + 80);
     text("Programming: Damien Di Fede", width/2, height/2 + 120);
     text("Art: Leonie Smelt", width/2, height/2 + 160);
@@ -52,23 +52,24 @@ class TitleScreen extends GameScreen
   
   void keyReleased()
   {
-    if ( key == 'L' )
-    {
-      titleArt = getAnimationInstance("levade");
-    }
-    else if ( key == 'C' )
-    {
-      titleArt = getAnimationInstance("courbette");
-    }
-    else if ( key == 'P' )
-    {
-      titleArt = getAnimationInstance("capriole");
-    }
-    else if ( key == 'T' )
-    {
-      titleArt = getAnimationInstance("test");
-    }
-    else if ( key != CODED )
+//    uncomment these lines to test animations on the title screen.
+//    if ( key == 'L' )
+//    {
+//      titleArt = getAnimationInstance("levade");
+//    }
+//    else if ( key == 'C' )
+//    {
+//      titleArt = getAnimationInstance("courbette");
+//    }
+//    else if ( key == 'P' )
+//    {
+//      titleArt = getAnimationInstance("capriole");
+//    }
+//    else if ( key == 'T' )
+//    {
+//      titleArt = getAnimationInstance("test");
+//    }
+//    else if ( key != CODED )
     {
       SwitchToScreen(INSTRUCTION_SCREEN);
     }
