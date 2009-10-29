@@ -61,6 +61,10 @@ class TitleScreen extends GameScreen
     {
       titleArt = getAnimationInstance("capriole");
     }
+    else if ( key == 'T' )
+    {
+      titleArt = getAnimationInstance("test");
+    }
     else if ( key != CODED )
     {
       SwitchToScreen(INSTRUCTION_SCREEN);
