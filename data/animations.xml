@@ -9,38 +9,41 @@
 	</animation>
 
 	<!-- used for waiting for the other horse -->
-	<animation name="waiting" fps="2">
+	<animation name="waiting" fps="1">
 		<frame>HORSE_PRANCE_01.svg</frame>
 		<frame>HORSE_PRANCE_02.svg</frame>
 	</animation>
 
 	<!-- used while preparing to do a trick -->
-	<animation name="preparing" fps="4">
+	<animation name="preparing" fps="5">
 		<frame>HORSE_PRANCE_01.svg</frame>
 		<frame>HORSE_PRANCE_02.svg</frame>
 	</animation>
 
 	<!-- and here are the tricks -->
-	<animation name="levade" fps="2">
+	<animation name="levade" fps="3">
 		<!-- TODO update with real graphics -->
 		<frame>HORSE_LEVADE_01.svg</frame>
 		<frame>HORSE_LEVADE_02.svg</frame>
-		<frame>HORSE_LEVADE_03.svg</frame>
-		<frame>HORSE_LEVADE_03.svg</frame>
 		<frame>HORSE_LEVADE_03.svg</frame>
 		<frame>HORSE_LEVADE_03.svg</frame>
 		<frame>HORSE_LEVADE_02.svg</frame>
 	</animation>
 
-	<animation name="courbette" fps="1">
-		<!-- TODO update with real graphics -->
-		<frame>HORSE_LEVADE_01.svg</frame>
-		<frame>HORSE_LEVADE_02.svg</frame>
-		<frame>HORSE_LEVADE_03.svg</frame>
-		<frame>HORSE_LEVADE_03.svg</frame>
-		<frame>HORSE_LEVADE_03.svg</frame>
-		<frame>HORSE_LEVADE_03.svg</frame>
-		<frame>HORSE_LEVADE_02.svg</frame>
+	<animation name="courbette" fps="4">
+		<frame>HORSE_COURBETTE_F01.svg</frame>
+		<frame>HORSE_COURBETTE_F02.svg</frame>
+		<frame>HORSE_COURBETTE_F03.svg</frame>
+		<frame>HORSE_COURBETTE_F04.svg</frame>
+		<frame>HORSE_COURBETTE_F03.svg</frame>
+		<frame>HORSE_COURBETTE_F02.svg</frame>
+		<frame>HORSE_COURBETTE_F03.svg</frame>
+		<frame>HORSE_COURBETTE_F04.svg</frame>
+		<frame>HORSE_COURBETTE_F03.svg</frame>
+		<frame>HORSE_COURBETTE_F02.svg</frame>
+		<frame>HORSE_COURBETTE_F01.svg</frame>
+		
+		
 	</animation>
 
 	<animation name="capriole" fps="1">
