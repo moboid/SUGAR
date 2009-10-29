@@ -18,6 +18,9 @@ class TitleScreen extends GameScreen
     textFont(titleFont);
     textAlign(CENTER);
     shapeMode(CORNER);
+    introMusic.loop();
+    introMusic.setGain(-6);
+    polka1.pause();
   }
   
   void draw(float dt)
@@ -60,6 +63,10 @@ class TitleScreen extends GameScreen
     else if ( key == 'P' )
     {
       titleArt = getAnimationInstance("capriole");
+    }
+    else if ( key == 'T' )
+    {
+      titleArt = getAnimationInstance("test");
     }
     else if ( key != CODED )
     {

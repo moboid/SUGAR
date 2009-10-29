@@ -17,6 +17,12 @@ class InstructionScreen extends GameScreen
     textSize(24);
   }
   
+  void exit()
+  {
+    introMusic.pause();
+    introMusic.rewind();
+  }
+  
   void draw(float dt)
   {
     // a brown background

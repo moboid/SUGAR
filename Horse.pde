@@ -16,6 +16,9 @@ class Horse
   // what animation am I currently in?
   private AnimationInstance m_currentAnimation;
   
+  // all the poops I am managing
+  ArrayList poops;
+  
   // where on the screen am I?
   private PVector m_screenPos;   
   
@@ -26,6 +29,8 @@ class Horse
   
   // how much we should scale before drawing.
   private float m_scale;
+  // will be -1 or 1 depending on whether we should flip our x or not.
+  private float m_xScale;
   
   // the other horse we need to synchronize with.
   private Horse m_otherHorse;
@@ -74,6 +79,8 @@ class Horse
   // next trick to perform
   private String nextTrick;
   
+  boolean performed;
+  
   // *****************************
   // ** METHODS
   
@@ -86,6 +93,8 @@ class Horse
     m_accumPos = new PVector();
     m_scale = 1;
     m_button = button;
+    poops = new ArrayList();
+    performed = false;
   }
   
   void setOtherHorse(Horse h)
@@ -119,6 +128,7 @@ class Horse
         break;
       case PERFORMING:
         m_currentAnimation = getAnimationInstance(nextTrick);
+        performed = true;
         break;
     }
     
@@ -161,6 +171,12 @@ class Horse
       case PERFORMING:
         performingState(dt, looped);
         break;
+    }
+    
+    for(int i = 0; i < poops.size(); i++)
+    {
+      Poop p = (Poop)poops.get(i);
+      p.update(dt);
     }
   }
   
@@ -342,15 +358,16 @@ class Horse
   {
     pushMatrix();
       translate(m_screenPos.x, m_screenPos.y);
-      // make sure we face the direction we are headed.
-      if ( m_screenPos.x < m_targetPos.x )
-      {
-        scale(-1, 1);
-      }
-      // make sure we are the correct size
-      scale(m_scale);
+      // make sure we face the direction we are headed and are the correct size
+      scale(m_xScale*m_scale, m_scale);
       m_currentAnimation.draw();
     popMatrix();
+    
+    for(int i = 0; i < poops.size(); i++)
+    {
+      Poop p = (Poop)poops.get(i);
+      p.draw();
+    }
     
     // only draw the box if we are in a trick window
     if ( m_state == PREPARING && m_trickWindowTimer >= 0 )
@@ -390,11 +407,27 @@ class Horse
     m_walkDirection.normalize();
     // randomly choose a speed
     m_walkSpeed = random(SLOW_WALK_SPEED, FAST_WALK_SPEED);
+    if ( x > m_screenPos.x )
+    {
+      m_xScale = -1;
+    }
+    else
+    {
+      m_xScale = 1;
+    }
     
     nextTrick = trickToPerform;
     
     // transition to the walking state.
     setState(WALKING);
+  }
+  
+  void poop()
+  {
+    println("Horse " + m_button + " pooped!");
+    PVector startAt = new PVector(m_screenPos.x + 20*m_xScale, m_screenPos.y - 40);
+    PVector landAt = new PVector(m_screenPos.x + 30*m_xScale, m_screenPos.y);
+    poops.add( new Poop(startAt, landAt) );    
   }
   
   // slams the position to the indicated position

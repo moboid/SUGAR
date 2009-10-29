@@ -57,4 +57,10 @@
 		<frame>HORSE_LEVADE_02.svg</frame>
 	</animation>
 
+    <!-- for testing frame rates lower than 1 -->
+	<animation name="test" fps="0.5">
+		<frame>HORSE_PRANCE_01.svg</frame>
+		<frame>HORSE_PRANCE_02.svg</frame>
+	</animation>
+
 </AnimationData>

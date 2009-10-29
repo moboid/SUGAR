@@ -60,6 +60,13 @@ class GameplayScreen extends GameScreen
     // initial state for our horses
     horseP1.setPosition(0, height);      
     horseP2.setPosition(width, height);
+    
+    horseP1.poops.clear();
+    horseP2.poops.clear();
+    
+    // ugh. so they don't poop right at the beginning.
+    horseP1.performed = true;
+    horseP2.performed = true;
 
     // to the first marker!
     letsGo();
@@ -67,14 +74,13 @@ class GameplayScreen extends GameScreen
     successfulTricks = 0;
     tricksToWin = 4;
     
-    polka1.play(0);
+    polka1.rewind();
+    polka1.loop();
     polka1.setGain(-6);
   }
   
   void exit()
   {
-    //polka1.pause();
-    polka1.shiftGain(-6, -60, 2000);
   }
   
   void draw(float dt)
@@ -107,7 +113,7 @@ class GameplayScreen extends GameScreen
   }  
   
   void letsGo()
-  {
+  {    
     currentMarker++;
     
     if ( currentMarker < markerPositions.size() )
@@ -132,6 +138,19 @@ class GameplayScreen extends GameScreen
       horseP1.pranceTo( width/2 - nextPos.x, nextPos.y, nextTrick );
       horseP2.pranceTo( width/2 + nextPos.x, nextPos.y, nextTrick );
       
+      // whoops, they other horse didn't perform with us.
+      if ( horseP1.performed == false && random(0,1) < POOP_CHANCE )
+      {
+        horseP1.poop();
+      } 
+      
+      if ( horseP2.performed == false && random(0,1) < POOP_CHANCE )
+      {
+        horseP2.poop();
+      } 
+      
+      horseP1.performed = false;
+      horseP2.performed = false;
     }
     else // no more markers, we're done!
     {

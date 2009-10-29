@@ -1,15 +1,15 @@
 /** TODO: A description of this game.
-  * <p>
-  * <b>Credits:</b>
-  * <p>
-  * Design: Heather Kelley<br/>
-  * Programming: Damien Di Fede<br/>
-  * Art: Leonie Smelt
-  * TODO: any additional credits
-  */
+ * <p>
+ * <b>Credits:</b>
+ * <p>
+ * Design: Heather Kelley<br/>
+ * Programming: Damien Di Fede<br/>
+ * Art: Leonie Smelt
+ * TODO: any additional credits
+ */
 
 import ddf.minim.*;
-  
+
 // a general font to be used by everyone, for now
 PFont sugarFont;
 // the brown color we will use for a background
@@ -17,8 +17,10 @@ PFont sugarFont;
 PImage SUGAR_BROWN;
 
 Minim minim;
+AudioSnippet introMusic;
 AudioPlayer polka1;
 AudioSample applause;
+AudioSample longApplause;
 AudioSample confetti;
 
 // how many trick opportunities are in one preparation period
@@ -45,47 +47,53 @@ float SLOW_WALK_SPEED = 30;
 
 // the fastest a horse will walk. this is units per second.
 float FAST_WALK_SPEED = 45;
-  
+
+// the percent chance that a horse will poop when it fails to
+// simultaneously perform a trick with its partner.
+float POOP_CHANCE = 0.65;
+
 void setup()
 {
   size(1024, 768);
   smooth();
   noCursor();
-  
+
   SUGAR_BROWN = loadImage("SUGAR_BACKGROUND.jpg");
   sugarFont = loadFont("BookmanOldStyle-Italic-48.vlw");
-  
+
   minim = new Minim(this);
+  introMusic = minim.loadSnippet("sugar_intro.wav");
   polka1 = minim.loadFile("sugar_polka_01.mp3", 2048);
+  longApplause = minim.loadSample("applause_orig.wav");
   applause = minim.loadSample("applause.wav");
   confetti = minim.loadSample("confetti_pop.wav");
-  
+
   // load all the animations
   loadAnimations();
-  
+
   // initialize all of our game screens
   setupTitleScreen();
   TITLE_SCREEN = new TitleScreen();
-  
+
   setupInstructionScreen();
   INSTRUCTION_SCREEN = new InstructionScreen();
-  
+
   setupGameplayScreen();
   GAMEPLAY_SCREEN = new GameplayScreen();
-  
+
   setupWinScreen();
   WIN_SCREEN = new WinScreen();
-  
+
   setupLoseScreen();
   LOSE_SCREEN = new LoseScreen();
-  
+
   // start on the title screen
   currentGameScreen = TITLE_SCREEN;
   currentGameScreen.enter();
-  
+
   // setup the particle effect
   setupParticleEffect();
-  
+
   // initialize the timer we use to figure out frame dt
   lastFrameStartTime = millis();
 }
@@ -103,14 +111,14 @@ void draw()
   lastFrameStartTime = millis();
   // convert the time to seconds
   timeSinceLastFrame /= 1000f;
-  
+
   // println("DT: " + timeSinceLastFrame);
-  
+
   // update the currentGameScreen
   currentGameScreen.draw( timeSinceLastFrame );
-  
+
   updateParticleEffect( timeSinceLastFrame );
-  
+
   drawParticleEffect();
 }
 
@@ -118,7 +126,7 @@ void keyPressed()
 {
   //println("User pressed " + key);
   currentGameScreen.keyPressed();
-  
+
   if ( key == 't' )
   {
     triggerParticleEffect();
@@ -134,6 +142,7 @@ void stop()
 {
   polka1.close();
   minim.stop();
-  
+
   super.stop();
 }
+
