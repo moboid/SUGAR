@@ -13,6 +13,7 @@ class WinScreen extends GameScreen
   {
     textFont(winFont);
     textAlign(CENTER);
+    longApplause.trigger();
   }
   
   void draw(float dt)

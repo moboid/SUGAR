@@ -18,6 +18,9 @@ class TitleScreen extends GameScreen
     textFont(titleFont);
     textAlign(CENTER);
     shapeMode(CORNER);
+    introMusic.loop();
+    introMusic.setGain(-6);
+    polka1.pause();
   }
   
   void draw(float dt)
