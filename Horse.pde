@@ -26,6 +26,8 @@ class Horse
   
   // how much we should scale before drawing.
   private float m_scale;
+  // will be -1 or 1 depending on whether we should flip our x or not.
+  private float m_xScale;
   
   // the other horse we need to synchronize with.
   private Horse m_otherHorse;
@@ -342,13 +344,8 @@ class Horse
   {
     pushMatrix();
       translate(m_screenPos.x, m_screenPos.y);
-      // make sure we face the direction we are headed.
-      if ( m_screenPos.x < m_targetPos.x )
-      {
-        scale(-1, 1);
-      }
-      // make sure we are the correct size
-      scale(m_scale);
+      // make sure we face the direction we are headed and are the correct size
+      scale(m_xScale*m_scale, m_scale);
       m_currentAnimation.draw();
     popMatrix();
     
@@ -390,6 +387,14 @@ class Horse
     m_walkDirection.normalize();
     // randomly choose a speed
     m_walkSpeed = random(SLOW_WALK_SPEED, FAST_WALK_SPEED);
+    if ( x > m_screenPos.x )
+    {
+      m_xScale = -1;
+    }
+    else
+    {
+      m_xScale = 1;
+    }
     
     nextTrick = trickToPerform;
     
