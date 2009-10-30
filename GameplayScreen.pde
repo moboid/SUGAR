@@ -77,7 +77,7 @@ class GameplayScreen extends GameScreen
     letsGo();
     
     successfulTricks = 0;
-    tricksToWin = 4;
+    tricksToWin = 3;
     
     polka1.rewind();
     polka1.loop();
@@ -99,7 +99,7 @@ class GameplayScreen extends GameScreen
     
     textSize(32);
     fill(255);
-    text("Tricks Performed: " + successfulTricks + " / " + tricksToWin, 5, 30);
+    text("Pas de deux: " + successfulTricks + " / " + tricksToWin, 5, 30);
     
     // draw the active marker
     if ( currentMarker < markerPositions.size() )

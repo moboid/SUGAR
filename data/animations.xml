@@ -27,10 +27,11 @@
 		<frame>HORSE_LEVADE_02.svg</frame>
 		<frame>HORSE_LEVADE_03.svg</frame>
 		<frame>HORSE_LEVADE_03.svg</frame>
+		<frame>HORSE_LEVADE_03.svg</frame>
 		<frame>HORSE_LEVADE_02.svg</frame>
 	</animation>
 
-	<animation name="courbette" fps="4">
+	<animation name="courbette" fps="3">
 		<frame>HORSE_COURBETTE_F01.svg</frame>
 		<frame>HORSE_COURBETTE_F02.svg</frame>
 		<frame>HORSE_COURBETTE_F03.svg</frame>
@@ -51,8 +52,10 @@
 		<frame>HORSE_CAPRIOLE_01.svg</frame>
 		<frame>HORSE_CAPRIOLE_02.svg</frame>
 		<frame>HORSE_CAPRIOLE_01.svg</frame>
+		<frame>HORSE_CAPRIOLE_01.svg</frame>
 		<frame>HORSE_CAPRIOLE_02.svg</frame>
 		<frame>HORSE_CAPRIOLE_03.svg</frame>
+		<frame>HORSE_CAPRIOLE_04.svg</frame>
 		<frame>HORSE_CAPRIOLE_04.svg</frame>
 		<frame>HORSE_CAPRIOLE_01.svg</frame>
 	</animation>

@@ -33,7 +33,7 @@ class TitleScreen extends GameScreen
     text("SUGAR", width/2, 100);
     
     // the art
-    titleArt.advance(dt);
+      titleArt.advance(dt);
     pushMatrix();
     translate(width/2, height/2);
     scale(0.5);

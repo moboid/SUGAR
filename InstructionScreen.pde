@@ -28,7 +28,7 @@ class InstructionScreen extends GameScreen
     // a brown background
     background(SUGAR_BROWN);
     
-    text("SUGAR is for two players.  \nPLAYER 1 = A KEY          PLAYER 2 = L KEY \n At each mark, wait for the bar to appear and press your key.  \n BUT, to succeed at the Pas de Deux you must perform at the same \n moment as your teammate, so communicate well!", width/2, height/2-75);
+    text("SUGAR is for two players.  \nPlayer 1 = A key          Player 2 = L key \n \n You are a young Lipizzaner peforming the Pas de Deux. \n At each white mark you can perform a special move. \n  While your bar fills, press your key.  \n  But that's not enough! \n To win the crowd, you must perform your tricks together. \n Use communication and quick timing to perfect your show!", width/2, height/2-150);
     
     // how to start
     text("Press any key to start the performance.", width/2, height/2 + 250);

@@ -22,7 +22,7 @@ class LoseScreen extends GameScreen
     fill(255);
     
     textSize(48);
-    text("YOU LOST!", width/2, height/2);
+    text("You two need more practice! \n Try again, or let some other horses perform now.", width/2, height/2);
     
     // what next?
     textSize(24);
