@@ -375,13 +375,14 @@ class Horse
       float timerYOff = 25;
       // timer outline
       float a = map(m_trickWindowTimer, 0, m_trickWindow, 255, 0);
-      noFill();
-      stroke(0, a);
-      rect(m_screenPos.x, m_screenPos.y + timerYOff, 100, 10);
+//      noFill();
+//      stroke(0, a);
+//      rect(m_screenPos.x, m_screenPos.y + timerYOff, 100, 10);
       
       // timer fill
+      noStroke();
       fill(0, a);
-      float rectWidth = map(m_trickWindowTimer, 0, m_trickWindow, 0, 100);
+      float rectWidth = map(m_trickWindowTimer, 0, m_trickWindow, 100, 0);
       rect(m_screenPos.x, m_screenPos.y + timerYOff, rectWidth, 10);
       
     }
