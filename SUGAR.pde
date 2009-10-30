@@ -24,10 +24,10 @@ AudioSample longApplause;
 AudioSample confetti;
 
 // how many trick opportunities are in one preparation period
-int PREPARE_TRICK_WINDOWS = 6;
+int PREPARE_TRICK_WINDOWS = 5;
 
 // how long a trick window lasts.
-float TRICK_WINDOW = 1f;
+float TRICK_WINDOW = 1.5f;
 
 // how much the length of the trick windows for a given trick
 // can vary. this is used to figure out the actual trick window
@@ -36,17 +36,17 @@ float TRICK_WINDOW_VARIANCE = 0.08f;
 
 // how much the trick window length will be scaled to be used for
 // the rest window length
-float REST_WINDOW_SCALE = 0.60f;
+float REST_WINDOW_SCALE = 0.70f;
 
 // how close together the two button presses must be for 
 // two tricks to count as simultaneous
-float SIMULTANEOUS_WINDOW = 0.3f;
+float SIMULTANEOUS_WINDOW = 0.2f;
 
 // the slowest a horse will walk. this is units per second.
-float SLOW_WALK_SPEED = 32;
+float SLOW_WALK_SPEED = 30;
 
 // the fastest a horse will walk. this is units per second.
-float FAST_WALK_SPEED = 43;
+float FAST_WALK_SPEED = 42;
 
 // the percent chance that a horse will poop when it fails to
 // simultaneously perform a trick with its partner.
