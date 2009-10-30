@@ -9,6 +9,7 @@
  */
 
 import ddf.minim.*;
+import megamu.shapetween.*;
 
 // a general font to be used by everyone, for now
 PFont sugarFont;
@@ -27,16 +28,16 @@ AudioSample confetti;
 int PREPARE_TRICK_WINDOWS = 5;
 
 // how long a trick window lasts.
-float TRICK_WINDOW = 1.5f;
+float TRICK_WINDOW = 0.8f;
 
 // how much the length of the trick windows for a given trick
 // can vary. this is used to figure out the actual trick window
 // for a horse at a marker.
-float TRICK_WINDOW_VARIANCE = 0.08f;
+float TRICK_WINDOW_VARIANCE = 0.1f;
 
 // how much the trick window length will be scaled to be used for
 // the rest window length
-float REST_WINDOW_SCALE = 0.70f;
+float REST_WINDOW_SCALE = 0.60f;
 
 // how close together the two button presses must be for 
 // two tricks to count as simultaneous
@@ -46,11 +47,19 @@ float SIMULTANEOUS_WINDOW = 0.2f;
 float SLOW_WALK_SPEED = 30;
 
 // the fastest a horse will walk. this is units per second.
-float FAST_WALK_SPEED = 42;
+float FAST_WALK_SPEED = 45;
 
 // the percent chance that a horse will poop when it fails to
 // simultaneously perform a trick with its partner.
 float POOP_CHANCE = 1;
+
+// the slowest a riser can rise, in seconds
+float SLOWEST_RISER = 1.2;
+
+// the fastest a riser can rise, in seconds
+float FASTEST_RISER = 1.8;
+
+
 
 void setup()
 {
@@ -83,7 +92,7 @@ void setup()
   GAMEPLAY_SCREEN = new GameplayScreen();
 
   setupWinScreen();
-  WIN_SCREEN = new WinScreen();
+  WIN_SCREEN = new WinScreen(this);
 
   setupLoseScreen();
   LOSE_SCREEN = new LoseScreen();
@@ -137,6 +146,11 @@ void keyPressed()
 void keyReleased()
 {
   currentGameScreen.keyReleased();
+  
+  if ( key == 'w' )
+  {
+     SwitchToScreen(WIN_SCREEN);
+  }
 }
 
 void stop()
