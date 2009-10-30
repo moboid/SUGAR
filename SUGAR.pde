@@ -66,7 +66,8 @@ void setup()
   polka1 = minim.loadFile("sugar_polka_01.mp3", 2048);
   longApplause = minim.loadSample("applause_orig.wav");
   applause = minim.loadSample("applause.wav");
-  confetti = minim.loadSample("confetti_pop.wav");
+  confetti = minim.loadSample("sugar_glitter.wav");
+  confetti.setGain(-6);
 
   // load all the animations
   loadAnimations();
