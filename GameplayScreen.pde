@@ -24,6 +24,8 @@ class GameplayScreen extends GameScreen
   // the marker the horses are walking to
   int       currentMarker;
   
+  PImage    markerImg;
+  
   GameplayScreen()
   {  
     horseP1 = new Horse( new char[] { 'a', 'A' } );
@@ -36,6 +38,8 @@ class GameplayScreen extends GameScreen
     horseP2.setOtherHorse(horseP1);
     
     markerPositions = new ArrayList();
+    
+    markerImg = loadImage("WalkMarker.png");
   }
   
   void enter()
@@ -44,6 +48,7 @@ class GameplayScreen extends GameScreen
     textAlign(LEFT);
     shapeMode(CORNER);
     rectMode(CENTER);
+    imageMode(CENTER);
     
     markerPositions.clear();
     
@@ -100,11 +105,14 @@ class GameplayScreen extends GameScreen
     if ( currentMarker < markerPositions.size() )
     {
       PVector pos = (PVector)markerPositions.get(currentMarker);
-      stroke(255, 128);
-      fill(0);
-      float rectSize = 10;
-      rect(width/2 - pos.x, pos.y, rectSize, rectSize);
-      rect(width/2 + pos.x, pos.y, rectSize, rectSize);
+      fill(0, 128);
+      image(markerImg, width/2 - pos.x, pos.y);
+      image(markerImg, width/2 + pos.x, pos.y);
+//      stroke(255, 128);
+//      fill(0);
+//      float rectSize = 10;
+//      rect(width/2 - pos.x, pos.y, rectSize, rectSize);
+//      rect(width/2 + pos.x, pos.y, rectSize, rectSize);
     }
     
     // draw the horsies!
