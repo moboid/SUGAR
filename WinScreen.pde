@@ -104,11 +104,11 @@ class WinScreen extends GameScreen
     fill(255);
     
     textSize(48);
-    text("YOU WON!", width/2, height/2);
+    text("SPECTACULAR PERFORMANCE! \n You earned your sugar. \n  Go again, or let the next duo perform.", width/2, height/2);
     
     // what next?
     textSize(24);
-    text("Press any key to continue.", width/2, height/2 + 30);
+    text("Press any key to continue.", width/2, height/2 + 250);
   }
   
   void keyReleased()
