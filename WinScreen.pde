@@ -17,7 +17,7 @@ class RiserPos
   
   RiserPos(PApplet parent, float x, float startY, float endY)
   {
-    float dur = random(SLOWEST_RISER, FASTEST_RISER);
+    float dur = random(FASTEST_RISER, SLOWEST_RISER);
     m_tween = new Tween(parent,  dur, Tween.SECONDS, Tween.COSINE);
     m_XPos = x;
     m_startYPos = startY;

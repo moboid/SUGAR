@@ -54,10 +54,10 @@ float FAST_WALK_SPEED = 45;
 float POOP_CHANCE = 1;
 
 // the slowest a riser can rise, in seconds
-float SLOWEST_RISER = 1.2;
+float SLOWEST_RISER = 1.8;
 
 // the fastest a riser can rise, in seconds
-float FASTEST_RISER = 1.8;
+float FASTEST_RISER = 1.2;
 
 
 
