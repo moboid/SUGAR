@@ -381,11 +381,18 @@ class Horse
       
       // timer fill
       noStroke();
-      fill(0, a);
-      float rectWidth = map(m_trickWindowTimer, 0, m_trickWindow, 100, 0);
-      rect(m_screenPos.x, m_screenPos.y + timerYOff, rectWidth, 10);
-      
+      fill(255, a);
+//      float rectWidth = map(m_trickWindowTimer, 0, m_trickWindow, 100, 0);
+//      rect(m_screenPos.x, m_screenPos.y + timerYOff, rectWidth, 10);
+      //  here's where i'm going to change it to the word "READY!" instead of a bar.
+      textSize(24);
+      text("READY!", m_screenPos.x, m_screenPos.y + timerYOff);
+
     }
+    
+
+
+
     // TODO state specific drawing.
   }
   
