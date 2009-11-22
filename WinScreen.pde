@@ -84,7 +84,7 @@ class WinScreen extends GameScreen
         float rowNum = floor(risers.size()/columns);
         float shiftSize = random(155, 158);
         float x = (width - 75) - shiftSize*columnNum;
-        float sy = height + riserImg.height/2;
+        float sy = height + riserImg.height/3;   //I changed this from 2 to 3 to keep them a bit lower (i think it worked?)
         float targetVar = random(-10, 70);
         float ty = height - 100 - riserImg.height/2*rowNum + targetVar;
         RiserPos pos = new RiserPos(parent, x, sy, ty);
@@ -104,11 +104,11 @@ class WinScreen extends GameScreen
     fill(255);
     
     textSize(48);
-    text("SPECTACULAR PERFORMANCE! \n You earned your sugar. \n  Go again, or let the next duo perform.", width/2, height/2);
+    text("SPECTACULAR PERFORMANCE! \n You earned your sugar. \n  Go again, or let the next duo perform.", width/2, height/3);
     
     // what next?
-    textSize(24);
-    text("Press any key to continue.", width/2, height/2 + 250);
+    textSize(32);
+    text("Press any key to continue.", width/2, height/3 + 170);
   }
   
   void keyReleased()
