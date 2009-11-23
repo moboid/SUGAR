@@ -64,6 +64,7 @@ class WinScreen extends GameScreen
     textFont(winFont);
     textAlign(CENTER);
     imageMode(CENTER);
+    triggerParticleEffect();
     // confetti.trigger();
     longApplause.trigger();
     risers.clear();
