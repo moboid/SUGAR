@@ -30,7 +30,7 @@ class InstructionScreen extends GameScreen
     // a brown background
     background(instructionImage);
     
-    text("SUGAR is for two players.  \nPlayer 1 = A key          Player 2 = L key \n \n You are a young stallion peforming the Pas de Deux. \n At each white mark you must perform a move together. \n  When your horses are both READY!, press your keys simultaneously.  \n \n CAREFUL! \n To win the crowd, you must perform your tricks together. \n Use communication to perfect your show!", width/2, height/2-150);
+    text("SUGAR is for two players.  \nPlayer 1 = A key          Player 2 = L key \n \n You are horses peforming a synchronized show. \n  Wait until both horses are READY! \n then press your keys simultaneously.  \n \n CAREFUL! \n To win the crowd, you must perform TOGETHER. \n Communicate, to perfect your show!", width/2, height/2-150);
     
     // how to start
     text("Press any key to start the performance.", width/2, height/2 + 250);
