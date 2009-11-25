@@ -15,9 +15,9 @@
 	</animation>
 
 	<!-- used while preparing to do a trick -->
-	<animation name="preparing" fps="5">
+	<animation name="preparing" fps="3">
 		<frame>HORSE_PRANCE_01.svg</frame>
-		<frame>HORSE_PRANCE_02.svg</frame>
+		<frame>HORSE_LEVADE_01.svg</frame>
 	</animation>
 
 	<!-- and here are the tricks -->
