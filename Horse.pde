@@ -374,7 +374,13 @@ class Horse
     {
       float timerYOff = 25;
       // timer outline
-      float a = map(m_trickWindowTimer, 0, m_trickWindow, 255, 0);
+      float normalizedTime = norm(m_trickWindowTimer, 0, m_trickWindow);
+      // if you want to tweak the curve that the shaper uses
+      // see: http://www.megamu.com/processing/shapetween/shaper_cosine.html
+      Shaper cosine = new CosineShaper();
+      float shapedTime = cosine.shape( normalizedTime );
+      float a = lerp(255, 0, shapedTime);
+//      float a = map(m_trickWindowTimer, 0, m_trickWindow, 255, 0);
 //      noFill();
 //      stroke(0, a);
 //      rect(m_screenPos.x, m_screenPos.y + timerYOff, 100, 10);
