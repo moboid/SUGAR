@@ -35,18 +35,18 @@ float TRICK_WINDOW = 1f;
 // how much the length of the trick windows for a given trick
 // can vary, in seconds. this is used to figure out the actual 
 // trick window for a horse at a marker.
-float TRICK_WINDOW_VARIANCE = 0.06f;
+float TRICK_WINDOW_VARIANCE = 0.08f;
 
 // how much the trick window length will be scaled to be used for
 // the rest window length
-float REST_WINDOW_SCALE = 0.60f;
+float REST_WINDOW_SCALE = 0.40f;
 
 // how close together the two button presses must be for 
 // two tricks to count as simultaneous
 float SIMULTANEOUS_WINDOW = 0.2f;
 
 // the slowest a horse will walk. this is units per second.
-float SLOW_WALK_SPEED = 41;
+float SLOW_WALK_SPEED = 40;
 
 // the fastest a horse will walk. this is units per second.
 float FAST_WALK_SPEED = 45;
