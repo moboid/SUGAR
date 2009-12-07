@@ -377,7 +377,7 @@ class Horse
       float normalizedTime = norm(m_trickWindowTimer, 0, m_trickWindow);
       // if you want to tweak the curve that the shaper uses
       // see: http://www.megamu.com/processing/shapetween/shaper_cosine.html
-      Shaper cosine = new CosineShaper();
+      Shaper cosine = new CosineShaper( Shaper.SIGMOID, 1, 0.35);
       float shapedTime = cosine.shape( normalizedTime );
       float a = lerp(255, 0, shapedTime);
 //      float a = map(m_trickWindowTimer, 0, m_trickWindow, 255, 0);
