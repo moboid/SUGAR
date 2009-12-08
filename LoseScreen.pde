@@ -2,6 +2,7 @@
 
 PFont loseFont;
 
+    
 void setupLoseScreen()
 {
   loseFont = sugarFont;
@@ -9,10 +10,12 @@ void setupLoseScreen()
 
 class LoseScreen extends GameScreen
 {
+float delayTimer;
   void enter()
   {
     textFont(loseFont);
     textAlign(CENTER);
+    delayTimer = millis();
   }
   
   void draw(float dt)
@@ -30,7 +33,9 @@ class LoseScreen extends GameScreen
   }
   
   void keyReleased()
+
   {
+    if (millis() - delayTimer > 3000)
     SwitchToScreen(TITLE_SCREEN);
   }
 }

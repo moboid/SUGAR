@@ -2,6 +2,8 @@
 
 PFont winFont;
 
+float delayTimer;
+
 void setupWinScreen()
 {
   winFont = sugarFont;
@@ -61,11 +63,11 @@ class WinScreen extends GameScreen
   
   void enter()
   {
+    delayTimer = millis();
     textFont(winFont);
     textAlign(CENTER);
     imageMode(CENTER);
     triggerParticleEffect();
-    // confetti.trigger();
     longApplause.trigger();
     risers.clear();
     totalRisers = 14;
@@ -114,6 +116,7 @@ class WinScreen extends GameScreen
   
   void keyReleased()
   {
+    if (millis() - delayTimer > 3000)
     SwitchToScreen(TITLE_SCREEN);
   }
 }

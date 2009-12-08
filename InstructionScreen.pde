@@ -12,8 +12,10 @@ void setupInstructionScreen()
 
 class InstructionScreen extends GameScreen
 {
+  float delayTimer;
   void enter()
   {
+    delayTimer = millis();
     textFont(instructionFont);
     textAlign(CENTER);
     textSize(32);
@@ -38,6 +40,7 @@ class InstructionScreen extends GameScreen
   
   void keyReleased()
   {
+    if (millis() - delayTimer > 1000)
     SwitchToScreen(GAMEPLAY_SCREEN);
   }
 }

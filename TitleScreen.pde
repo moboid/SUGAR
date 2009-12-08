@@ -2,8 +2,6 @@
 PFont titleFont;
 AnimationInstance titleArt;
 
-float delayTimer;
-
 // load all of our assets for the title screen.
 // this is called from setup() in SUGAR
 void setupTitleScreen()
@@ -15,6 +13,7 @@ void setupTitleScreen()
 // A class to do all of our TitleScreen stuff
 class TitleScreen extends GameScreen
 {
+  float delayTimer;
   void enter()
   {
     delayTimer = millis();
@@ -58,7 +57,7 @@ class TitleScreen extends GameScreen
   
   void keyReleased()
   {
-    if (millis() - delayTimer > 5000);
+    if (millis() - delayTimer > 1000)
 //    uncomment these lines to test animations on the title screen.
 //    if ( key == 'L' )
 //    {
