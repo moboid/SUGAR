@@ -2,8 +2,6 @@
 
 PFont winFont;
 
-float delayTimer;
-
 void setupWinScreen()
 {
   winFont = sugarFont;
@@ -39,6 +37,8 @@ class RiserPos
 
 class WinScreen extends GameScreen
 {
+  float delayTimer;
+  
   // need a handle of the PApplet because it needs to get down to the Tween in RiserPos.
   PApplet parent;
   
