@@ -30,6 +30,8 @@ class TitleScreen extends GameScreen
     // a brown background
     background(SUGAR_BROWN);
     
+    fill(255);
+    
     // the name of the game
     textSize(48);
     text("SUGAR", width/2, 100);
