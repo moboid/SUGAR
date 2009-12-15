@@ -54,7 +54,8 @@ class TitleScreen extends GameScreen
     text("Press any key.", width/2, height/2 + 250);
     
     // testing the timer
-    println(delayTimer);
+    // ddf: printing stuff every frame is not a very good idea once you are ready to ship.
+    // println(delayTimer);
   }
   
   void keyReleased()

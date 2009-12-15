@@ -162,6 +162,12 @@ class Horse
         waitingState(dt);
         break;
       case WALKING:
+        // update incrementally to prevent the "walk forever" bug.
+        while( dt > 0.03f )
+        {
+          walkingState(0.03f, false);
+          dt -= 0.03f;
+        }
         boolean updatePos = (currFrame != nextFrame);
         walkingState(dt, updatePos);
         break;

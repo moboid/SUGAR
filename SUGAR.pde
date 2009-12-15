@@ -18,7 +18,7 @@ PFont sugarFont;
 PImage SUGAR_BROWN;
 
 Minim minim;
-AudioSnippet introMusic;
+AudioPlayer introMusic;
 AudioPlayer polka1;
 AudioSample applause;
 AudioSample longApplause;
@@ -68,16 +68,18 @@ void setup()
   size(1024, 768);
   smooth();
   noCursor();
+  // ddf: uncomment this to verify that the low-framerate "walk forever" bug has been fixed.
+  //frameRate(5);
 
   SUGAR_BROWN = loadImage("SUGAR_BACKGROUND.jpg");
   sugarFont = loadFont("TitleFont.vlw");
 
   minim = new Minim(this);
-  introMusic = minim.loadSnippet("sugar_intro.wav");
+  introMusic = minim.loadFile("sugar_intro.wav", 2048);
   polka1 = minim.loadFile("sugar_polka_01.mp3", 2048);
-  longApplause = minim.loadSample("applause_orig.wav");
-  applause = minim.loadSample("applause.wav");
-  confetti = minim.loadSample("sugar_glitter.wav");
+  longApplause = minim.loadSample("applause_orig.wav", 2048);
+  applause = minim.loadSample("applause.wav", 2048);
+  confetti = minim.loadSample("sugar_glitter.wav", 2048);
   confetti.setGain(-6);
 
   // load all the animations
