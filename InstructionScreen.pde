@@ -34,10 +34,10 @@ class InstructionScreen extends GameScreen
     
     fill(255);
     
-    text("SUGAR is for two players.  \nPlayer 1 = A key          Player 2 = L key \n \n You are horses peforming a synchronized show. \n  Wait until both horses are READY! \n then press your keys simultaneously.  \n \n CAREFUL! \n To win the crowd, you must perform TOGETHER. \n Communicate, to perfect your show!", width/2, height/2-150);
+    text("SUGAR is for two players.  \nPlayer 1 = P1 button          Player 2 = P2 button \n \n You are horses peforming a synchronized show. \n  Wait until both horses are READY! \n then press your keys simultaneously.  \n \n CAREFUL! \n To win the crowd, you must perform TOGETHER. \n Communicate, to perfect your show!", width/2, height/2-150);
     
     // how to start
-    text("Press any key to start the performance.", width/2, height/2 + 250);
+    text("Press P1 or P2 to start the performance.", width/2, height/2 + 250);
   }
   
   void keyReleased()

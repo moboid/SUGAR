@@ -111,7 +111,7 @@ class WinScreen extends GameScreen
     
     // what next?
     textSize(32);
-    text("Press any key to continue.", width/2, height/3 + 170);
+    text("Press P1 or P2 to continue.", width/2, height/3 + 170);
   }
   
   void keyReleased()

@@ -51,7 +51,7 @@ class TitleScreen extends GameScreen
     text("Art: Leonie Smelt", width/2, height/2 + 160);
     
     // how to start
-    text("Press any key.", width/2, height/2 + 250);
+    text("Press P1 or P2 to begin.", width/2, height/2 + 250);
     
     // testing the timer
     // ddf: printing stuff every frame is not a very good idea once you are ready to ship.
