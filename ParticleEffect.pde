@@ -2,6 +2,7 @@
 // when you successfully perform a trick.
 
 import traer.physics.*;
+import java.util.Iterator;
 
 ParticleSystem phys;
 // list we'll stuff all of our pieces of confetti into.

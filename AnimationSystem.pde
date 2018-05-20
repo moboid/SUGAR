@@ -11,22 +11,22 @@ void loadAnimations()
 {
   animations = new HashMap(); 
   shapes = new HashMap();
-  XMLElement anims = new XMLElement(this, "animations.xml");
+  XML anims = loadXML("animations.xml");
   int numAnims = anims.getChildCount();
   for(int i = 0; i < numAnims; i++)
   {
-    XMLElement animXML = anims.getChild(i);
+    XML animXML = anims.getChild(i);
     //println(animXML.getName());
     if ( animXML.getName().equals("animation") )
     {
-      float fps = animXML.getFloatAttribute("fps");
-      String name = animXML.getStringAttribute("name");
+      float fps = animXML.getFloat("fps");
+      String name = animXML.getString("name");
       println("Found animation " + name);
       Animation anim = new Animation(fps);
       int numFrames = animXML.getChildCount();
       for(int f = 0; f < numFrames; f++)
       {
-        XMLElement frameXML = animXML.getChild(f);
+        XML frameXML = animXML.getChild(f);
         if ( frameXML.getName().equals("frame") )
         {
           String frameFileName = frameXML.getContent();
