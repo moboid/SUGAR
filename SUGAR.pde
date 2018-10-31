@@ -1,3 +1,5 @@
+
+
 /** TODO: A description of this game.
  * <p>
  * <b>Credits:</b>
@@ -10,6 +12,8 @@
 
 import ddf.minim.*;
 import megamu.shapetween.*;
+import processing.serial.*;
+import processing.serial.Serial;
 
 // a general font to be used by everyone, for now
 PFont sugarFont;
@@ -61,11 +65,25 @@ float SLOWEST_RISER = 0.8;
 // the fastest a riser can rise, in seconds
 float FASTEST_RISER = 0.4;
 
+// setting up the smell box
+String portName;//change the 0 to a 1 or 2 etc. to match your port
+Serial SMELL_PORT;
+
+// the fail/pass conditions for the smell box
+int GOOD_JOB = 0;
+int BAD_SHOW = 1;
+
+
+final SmellManager SMELL_MANAGER = SmellManager.getInstance(this);
+
 
 
 void setup()
 {
   size(1024, 768);
+  printArray(Serial.list());
+  //portName = Serial.list()[0];
+  //new Serial(this, portName, 9600);
   smooth();
   noCursor();
   // ddf: uncomment this to verify that the low-framerate "walk forever" bug has been fixed.
@@ -165,3 +183,54 @@ void stop()
   super.stop();
 }
 
+static class SmellManager {
+ 
+  private static SmellManager inst;
+  private static PApplet p;
+  private Serial SMELL_PORT;
+  // values to write to arduino for the smells, 2 arrays of 2 vals
+  // horse 1: good and bad, horse 2: good and bad
+  final static char[][] writeVals = {{'A', 'B'}, {'C', 'D'}}; 
+  final static char SMELL_OFF_VAL = 'O';
+  final float SMELL_TIME_LIMIT = 2f;
+  private static float smelledForTime;
+  private static boolean smellActive;
+ 
+  private SmellManager() {
+  } 
+ 
+  static SmellManager getInstance(PApplet papp) { 
+    if (inst == null) {
+      inst = new SmellManager();
+      smelledForTime = 0;
+      smellActive = false;
+      p = papp;
+    }
+    return inst;
+  }
+
+  void makeSmell(int condition, int horseIndex)
+  {
+    SMELL_PORT.write(writeVals[horseIndex][condition]);
+    println("horse"+horseIndex + " smell for condition " + condition);
+    smellActive = true;
+    smelledForTime = 0;
+  }
+
+  // if we are running a smell and have reached the time for smelling that, turn off the smell.
+  void update(float dt)
+  {
+    if(smellActive)
+    {
+      smelledForTime += dt;
+      if(smelledForTime >= SMELL_TIME_LIMIT)
+      {
+        SMELL_PORT.write(SMELL_OFF_VAL);
+        println("smell on for " + smelledForTime +"sec, turning smell off");
+        smellActive = false;
+      }
+    }
+  }
+ 
+  
+}

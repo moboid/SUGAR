@@ -1,0 +1,3 @@
+[submodule "libraries/traerphysics"]
+	path = libraries/traerphysics
+	url = https://github.com/ThomasLengeling/traerphysics
