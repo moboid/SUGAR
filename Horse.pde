@@ -26,7 +26,6 @@ class Horse
   private int   m_state;
   
   // how far along m_direction we should be while moving towards 
-  
   // how much we should scale before drawing.
   private float m_scale;
   // will be -1 or 1 depending on whether we should flip our x or not.
@@ -80,11 +79,12 @@ class Horse
   private String nextTrick;
   
   boolean performed;
+  int playerIndex;
   
   // *****************************
   // ** METHODS
   
-  Horse(char[] buttons)
+  Horse(char[] buttons, int index)
   {
     m_currentAnimation = getAnimationInstance("walking");
     m_screenPos = new PVector(width/2, height/2);
@@ -95,6 +95,7 @@ class Horse
     m_buttons = buttons;
     poops = new ArrayList();
     performed = false;
+    playerIndex = index;
   }
   
   void setOtherHorse(Horse h)
@@ -127,6 +128,7 @@ class Horse
         m_trickRestTimer = -1;
         break;
       case PERFORMING:
+        println(nextTrick);
         m_currentAnimation = getAnimationInstance(nextTrick);
         performed = true;
         break;
@@ -155,6 +157,7 @@ class Horse
     // advance our current animation
     boolean looped = m_currentAnimation.advance(dt);
     int nextFrame = m_currentAnimation.currentFrame();
+ 
     
     switch(m_state)
     {
@@ -316,7 +319,11 @@ class Horse
     if ( key == m_buttons[0] || key == m_buttons[1] )
     {
       println("Horse " + m_buttons[0] + " is responding.");
-      if ( m_state == PREPARING && m_trickWindowTimer >= 0 )
+      
+      // JACOB: commented out the m_trickWindowTimer condition
+      //        because it was disallowing horses to perform
+      //        when the READY was on the off state of blinking
+      if ( m_state == PREPARING /*&& m_trickWindowTimer >= 0 */)
       {
         println("Horse " + m_buttons[0] + " gonna perform.");
         setState(PERFORMING);
@@ -461,4 +468,7 @@ class Horse
   {
     m_scale = s;
   }
+  
+   
+
 }

@@ -28,10 +28,10 @@ class GameplayScreen extends GameScreen
   
   GameplayScreen()
   {  
-    horseP1 = new Horse( new char[] { 'a', 'A' } );
+    horseP1 = new Horse( new char[] { 'a', 'A' }, 0 );
     horseP1.setScale(0.25);
     
-    horseP2 = new Horse( new char[] { 'l', 'L' } );
+    horseP2 = new Horse( new char[] { 'l', 'L' }, 1 );
     horseP2.setScale(0.25);
     
     horseP1.setOtherHorse(horseP2);
@@ -93,6 +93,7 @@ class GameplayScreen extends GameScreen
     // update the horses
     horseP1.update(dt);
     horseP2.update(dt);
+    SMELL_MANAGER.update(dt);
     
     // draw stuff
     background(SUGAR_BROWN);
@@ -128,11 +129,11 @@ class GameplayScreen extends GameScreen
     {
       float trickPercent = random(0, 1);
       String nextTrick = "";
-      if ( trickPercent < 0.3 )
+      if ( trickPercent <= 0.34 )
       {
         nextTrick = "levade";
       }
-      else if ( trickPercent < 0.6 )
+      else if ( trickPercent <= 0.63 )
       {
         nextTrick = "courbette";
       }
