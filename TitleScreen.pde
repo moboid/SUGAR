@@ -52,7 +52,7 @@ class TitleScreen extends GameScreen
     text("Additional coding: Jacob Rosenbloom", width/2, height/2 + 160);
     
     // how to start
-    text("Press any button to begin.", width/2, height/2 + 250);
+    text("Press either Horse button to begin.", width/2, height/2 + 250);
     
     // testing the timer
     // ddf: printing stuff every frame is not a very good idea once you are ready to ship.
