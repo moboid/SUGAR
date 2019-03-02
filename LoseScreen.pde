@@ -29,7 +29,7 @@ float delayTimer;
     
     // what next?
     textSize(24);
-    text("Press P1 or P2 to continue.", width/2, height/2 + 250);
+    text("Press a Horse button to continue.", width/2, height/2 + 250);
   }
   
   void keyReleased()
