@@ -80,7 +80,7 @@ final SmellManager SMELL_MANAGER = SmellManager.getInstance(this);
 
 void setup()
 {
-  size(1600, 1200);
+  size(1024, 768);
   printArray(Serial.list());
   //portName = Serial.list()[0];
   //new Serial(this, portName, 9600);
@@ -89,7 +89,7 @@ void setup()
   // ddf: uncomment this to verify that the low-framerate "walk forever" bug has been fixed.
   //frameRate(5);
 
-  SUGAR_BROWN = loadImage("SUGAR_BACKGROUND_1200.jpg");
+  SUGAR_BROWN = loadImage("SUGAR_BACKGROUND.jpg");
   sugarFont = loadFont("TitleFont.vlw");
 
   minim = new Minim(this);
