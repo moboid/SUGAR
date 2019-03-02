@@ -7,7 +7,7 @@
  * Design: Heather Kelley<br/>
  * Programming: Damien Di Fede<br/>
  * Art: Leonie Smelt
- * TODO: any additional credits
+ * Additional Programming: Jacob Rosenbloom
  */
 
 import ddf.minim.*;
