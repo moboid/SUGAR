@@ -15,6 +15,9 @@ float delayTimer;
   {
     textFont(loseFont);
     textAlign(CENTER);
+    // Zephlord:
+    // turn off the fan when entering the screen
+    SMELL_MANAGER.smellOff();
     delayTimer = millis();
   }
   
@@ -30,6 +33,11 @@ float delayTimer;
     // what next?
     textSize(24);
     text("Press a Horse button to continue.", width/2, height/2 + 250);
+
+    // Zephlord: 
+    // Check timer each frame; after 30sec, go back to title
+    if (millis() - delayTimer > 30000)
+      SwitchToScreen(TITLE_SCREEN);
   }
   
   void keyReleased()

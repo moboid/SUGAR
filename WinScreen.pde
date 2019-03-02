@@ -72,6 +72,9 @@ class WinScreen extends GameScreen
     risers.clear();
     totalRisers = 14;
     riserSpawnTimer = 0.5;
+    // Zephlord:
+    // turn off the fan when entering the screen
+    SMELL_MANAGER.smellOff();
   }
   
   void draw(float dt)
@@ -112,6 +115,11 @@ class WinScreen extends GameScreen
     // what next?
     textSize(32);
     text("Press a Horse button to continue.", width/2, height/3 + 170);
+
+    // Zephlord: 
+    // Check timer each frame; after 30sec, go back to title
+    if (millis() - delayTimer > 30000)
+      SwitchToScreen(TITLE_SCREEN);
   }
   
   void keyReleased()

@@ -400,10 +400,23 @@ class Horse
       
       // timer fill
       noStroke();
-      fill(255, a);
+      fill(255, 255);
 //      float rectWidth = map(m_trickWindowTimer, 0, m_trickWindow, 100, 0);
 //      rect(m_screenPos.x, m_screenPos.y + timerYOff, rectWidth, 10);
       //  here's where i'm going to change it to the word "READY!" instead of a bar.
+
+
+      // Zephlord:
+      // 1/2 the time we will use one font
+      // the other will change to other font
+      // "READY!" will no longer blink, but shift fonts
+      if(a < (255/2)) {
+        textFont(sugarFont);
+      }
+      else {
+        textFont(readyAltFont);
+      }
+
       textSize(24);
       text("READY!", m_screenPos.x, m_screenPos.y + timerYOff);
 

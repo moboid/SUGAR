@@ -17,6 +17,7 @@ import processing.serial.Serial;
 
 // a general font to be used by everyone, for now
 PFont sugarFont;
+PFont readyAltFont;
 // the brown color we will use for a background
 //color SUGAR_BROWN = color(70, 40, 0);
 PImage SUGAR_BROWN;
@@ -77,7 +78,6 @@ int BAD_SHOW = 1;
 final SmellManager SMELL_MANAGER = SmellManager.getInstance(this);
 
 
-
 void setup()
 {
   size(1024, 768);
@@ -91,6 +91,7 @@ void setup()
 
   SUGAR_BROWN = loadImage("SUGAR_BACKGROUND.jpg");
   sugarFont = loadFont("TitleFont.vlw");
+  readyAltFont = loadFont("ready-alt-font.vlw");
 
   minim = new Minim(this);
   introMusic = minim.loadFile("sugar_intro.wav", 2048);
@@ -159,20 +160,23 @@ void keyPressed()
   //println("User pressed " + key);
   currentGameScreen.keyPressed();
 
-  if ( key == 't' )
-  {
-    triggerParticleEffect();
-  }
+  // if ( key == 't' )
+  // {
+  //   triggerParticleEffect();
+  // }
 }
 
 void keyReleased()
 {
   currentGameScreen.keyReleased();
   
-  if ( key == 'w' )
-  {
-     SwitchToScreen(WIN_SCREEN);
-  }
+  // Zephlord: 
+  // This is the autowin button for testing the win screen
+
+  // if ( key == 'w' )
+  // {
+  //    SwitchToScreen(WIN_SCREEN);
+  // }
 }
 
 void stop()
@@ -217,6 +221,13 @@ static class SmellManager {
     smelledForTime = 0;
   }
 
+  void smellOff()
+  {
+    SMELL_PORT.write(SMELL_OFF_VAL);
+    println("smell on for " + smelledForTime +"sec, turning smell off");
+    smellActive = false;
+  }
+
   // if we are running a smell and have reached the time for smelling that, turn off the smell.
   void update(float dt)
   {
@@ -225,9 +236,7 @@ static class SmellManager {
       smelledForTime += dt;
       if(smelledForTime >= SMELL_TIME_LIMIT)
       {
-        SMELL_PORT.write(SMELL_OFF_VAL);
-        println("smell on for " + smelledForTime +"sec, turning smell off");
-        smellActive = false;
+        smellOff();
       }
     }
   }
