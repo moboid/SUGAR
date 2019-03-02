@@ -7,7 +7,7 @@ PImage instructionImage;
 void setupInstructionScreen()
 {
   instructionFont = sugarFont;
-  instructionImage = loadImage("INSTRUCTION_BACKGROUND.jpg");
+  instructionImage = loadImage("INSTRUCTION_BACKGROUND_1200.jpg");
 }
 
 class InstructionScreen extends GameScreen
@@ -34,10 +34,10 @@ class InstructionScreen extends GameScreen
     
     fill(255);
     
-    text("SUGAR is for two players.  \nPlayer 1 = P1 button          Player 2 = P2 button \n \n You are horses peforming a synchronized show. \n  Wait until both horses are READY! \n then press your buttons simultaneously.  \n \n CAREFUL! \n To win the crowd, you must perform TOGETHER. \n Communicate, to perfect your show!", width/2, height/2-150);
+    text("SUGAR is for two players.  \nPlayer 1 = Left Horse button          Player 2 = Right Horse button \n \n You are a pair of horses peforming a synchronized show. \n  Wait until both horses are READY! \n then both press your buttons simultaneously.  \n \n CAREFUL! \n To win the crowd, you must perform TOGETHER. \n Communicate and coordinate, to perfect your show!", width/2, height/2-150);
     
     // how to start
-    text("Press P1 or P2 to start the performance.", width/2, height/2 + 250);
+    text("Press either Horse button to start the performance.", width/2, height/2 + 250);
   }
   
   void keyReleased()
