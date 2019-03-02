@@ -33,7 +33,7 @@ class TitleScreen extends GameScreen
     fill(255);
     
     // the name of the game
-    textSize(72);
+    textSize(48);
     text("SUGAR", width/2, 100);
     
     // the art
@@ -49,7 +49,7 @@ class TitleScreen extends GameScreen
     text("Design: Heather Kelley", width/2, height/2 + 80);
     text("Programming: Damien Di Fede", width/2, height/2 + 120);
     text("Art: Leonie Smelt", width/2, height/2 + 160);
-    text("Additional coding: Jacob Rosenbloom", width/2, height/2 + 160);
+    text("Additional coding: Jacob Rosenbloom", width/2, height/2 + 200);
     
     // how to start
     text("Press either Horse button to begin.", width/2, height/2 + 250);
