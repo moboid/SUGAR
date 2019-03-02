@@ -33,7 +33,7 @@ class TitleScreen extends GameScreen
     fill(255);
     
     // the name of the game
-    textSize(48);
+    textSize(72);
     text("SUGAR", width/2, 100);
     
     // the art
@@ -49,9 +49,10 @@ class TitleScreen extends GameScreen
     text("Design: Heather Kelley", width/2, height/2 + 80);
     text("Programming: Damien Di Fede", width/2, height/2 + 120);
     text("Art: Leonie Smelt", width/2, height/2 + 160);
+    text("Additional coding: Jacob Rosenbloom", width/2, height/2 + 160);
     
     // how to start
-    text("Press P1 or P2 to begin.", width/2, height/2 + 250);
+    text("Press any button to begin.", width/2, height/2 + 250);
     
     // testing the timer
     // ddf: printing stuff every frame is not a very good idea once you are ready to ship.
