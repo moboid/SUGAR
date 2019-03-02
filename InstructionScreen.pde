@@ -7,7 +7,7 @@ PImage instructionImage;
 void setupInstructionScreen()
 {
   instructionFont = sugarFont;
-  instructionImage = loadImage("INSTRUCTION_BACKGROUND_1200.jpg");
+  instructionImage = loadImage("INSTRUCTION_BACKGROUND.jpg");
 }
 
 class InstructionScreen extends GameScreen
