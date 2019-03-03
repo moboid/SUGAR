@@ -67,7 +67,6 @@ float FASTEST_RISER = 0.4;
 
 // setting up the smell box
 String portName;//change the 0 to a 1 or 2 etc. to match your port
-Serial SMELL_PORT;
 
 // the fail/pass conditions for the smell box
 int GOOD_JOB = 0;
@@ -80,9 +79,6 @@ final SmellManager SMELL_MANAGER = SmellManager.getInstance(this);
 void setup()
 {
   size(1024, 768);
-  printArray(Serial.list());
-  portName = Serial.list()[0];
-  SMELL_PORT = new Serial(this, portName, 9600);
   smooth();
   noCursor();
   // ddf: uncomment this to verify that the low-framerate "walk forever" bug has been fixed.
@@ -189,6 +185,7 @@ static class SmellManager {
  
   private static SmellManager inst;
   private static PApplet p;
+  private Serial smellPort;
   // values to write to arduino for the smells, 2 arrays of 2 vals
   // horse 1: good and bad, horse 2: good and bad
   final static char[][] writeVals = {{'A', 'B'}, {'C', 'D'}}; 
@@ -210,16 +207,28 @@ static class SmellManager {
     return inst;
   }
 
+  private void checkPort()
+  {
+    if(smellPort == null)
+    {
+      // setting up the smell box communication
+      String portName = Serial.list()[0]; //change the 0 to a 1 or 2 etc. to match your port
+      smellPort = new Serial(p, portName, 9600);
+    }
+  }
+
   void makeSmell(int condition, int horseIndex)
   {
-    SMELL_PORT.write(writeVals[horseIndex][condition]);
+    checkPort();
+    smellPort.write(writeVals[horseIndex][condition]);
     println("horse"+horseIndex + " smell for condition " + condition);
     smellActive = true;
     smelledForTime = 0;
   }
 
   void turnSmellOff() {
-    SMELL_PORT.write(SMELL_OFF_VAL);
+    checkPort();
+    smellPort.write(SMELL_OFF_VAL);
     smellActive = false;
   }
 
