@@ -77,7 +77,6 @@ int BAD_SHOW = 1;
 final SmellManager SMELL_MANAGER = SmellManager.getInstance(this);
 
 
-
 void setup()
 {
   size(1024, 768);
@@ -169,6 +168,9 @@ void keyReleased()
 {
   currentGameScreen.keyReleased();
   
+  // Zephlord: 
+  // This is the autowin button for testing the win screen
+
   // if ( key == 'w' )
   // {
   //    SwitchToScreen(WIN_SCREEN);

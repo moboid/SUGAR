@@ -113,6 +113,8 @@ class WinScreen extends GameScreen
     textSize(32);
     text("Press a Horse button to continue.", width/2, height/3 + 170);
 
+    // Zephlord: 
+    // Check timer each frame; after 30sec, go back to title
     if (millis() - delayTimer > 30000)
       SwitchToScreen(TITLE_SCREEN);
   }

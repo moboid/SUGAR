@@ -31,6 +31,8 @@ float delayTimer;
     textSize(24);
     text("Press a Horse button to continue.", width/2, height/2 + 250);
 
+    // Zephlord: 
+    // Check timer each frame; after 30sec, go back to title
     if (millis() - delayTimer > 30000)
       SwitchToScreen(TITLE_SCREEN);
   }
