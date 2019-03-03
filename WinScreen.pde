@@ -112,6 +112,9 @@ class WinScreen extends GameScreen
     // what next?
     textSize(32);
     text("Press a Horse button to continue.", width/2, height/3 + 170);
+
+    if (millis() - delayTimer > 30000)
+      SwitchToScreen(TITLE_SCREEN);
   }
   
   void keyReleased()

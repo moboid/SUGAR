@@ -383,7 +383,7 @@ class Horse
     }
     
     // only draw the box if we are in a trick window
-    if ( m_state == PREPARING && m_trickWindowTimer >= 0 )
+    if ( m_state == PREPARING )
     {
       float timerYOff = 25;
       // timer outline
@@ -392,7 +392,7 @@ class Horse
       // see: http://www.megamu.com/processing/shapetween/shaper_cosine.html
       Shaper cosine = new CosineShaper( Shaper.SIGMOID, 1, 0.35);
       float shapedTime = cosine.shape( normalizedTime );
-      float a = lerp(255, 0, shapedTime);
+      float a = lerp(255, 128, normalizedTime);
 //      float a = map(m_trickWindowTimer, 0, m_trickWindow, 255, 0);
 //      noFill();
 //      stroke(0, a);

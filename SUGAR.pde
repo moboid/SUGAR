@@ -159,20 +159,20 @@ void keyPressed()
   //println("User pressed " + key);
   currentGameScreen.keyPressed();
 
-  if ( key == 't' )
-  {
-    triggerParticleEffect();
-  }
+  // if ( key == 't' )
+  // {
+  //   triggerParticleEffect();
+  // }
 }
 
 void keyReleased()
 {
   currentGameScreen.keyReleased();
   
-  if ( key == 'w' )
-  {
-     SwitchToScreen(WIN_SCREEN);
-  }
+  // if ( key == 'w' )
+  // {
+  //    SwitchToScreen(WIN_SCREEN);
+  // }
 }
 
 void stop()

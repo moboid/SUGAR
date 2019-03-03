@@ -30,6 +30,9 @@ float delayTimer;
     // what next?
     textSize(24);
     text("Press a Horse button to continue.", width/2, height/2 + 250);
+
+    if (millis() - delayTimer > 30000)
+      SwitchToScreen(TITLE_SCREEN);
   }
   
   void keyReleased()
