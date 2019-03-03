@@ -72,6 +72,7 @@ class WinScreen extends GameScreen
     risers.clear();
     totalRisers = 14;
     riserSpawnTimer = 0.5;
+    SMELL_MANAGER.turnSmellOff();
   }
   
   void draw(float dt)

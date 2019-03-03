@@ -16,6 +16,7 @@ float delayTimer;
     textFont(loseFont);
     textAlign(CENTER);
     delayTimer = millis();
+    SMELL_MANAGER.turnSmellOff();
   }
   
   void draw(float dt)

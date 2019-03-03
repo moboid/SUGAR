@@ -81,8 +81,8 @@ void setup()
 {
   size(1024, 768);
   printArray(Serial.list());
-  //portName = Serial.list()[0];
-  //new Serial(this, portName, 9600);
+  portName = Serial.list()[0];
+  SMELL_PORT = new Serial(this, portName, 9600);
   smooth();
   noCursor();
   // ddf: uncomment this to verify that the low-framerate "walk forever" bug has been fixed.
@@ -189,7 +189,6 @@ static class SmellManager {
  
   private static SmellManager inst;
   private static PApplet p;
-  private Serial SMELL_PORT;
   // values to write to arduino for the smells, 2 arrays of 2 vals
   // horse 1: good and bad, horse 2: good and bad
   final static char[][] writeVals = {{'A', 'B'}, {'C', 'D'}}; 
@@ -219,6 +218,11 @@ static class SmellManager {
     smelledForTime = 0;
   }
 
+  void turnSmellOff() {
+    SMELL_PORT.write(SMELL_OFF_VAL);
+    smellActive = false;
+  }
+
   // if we are running a smell and have reached the time for smelling that, turn off the smell.
   void update(float dt)
   {
@@ -227,9 +231,8 @@ static class SmellManager {
       smelledForTime += dt;
       if(smelledForTime >= SMELL_TIME_LIMIT)
       {
-        SMELL_PORT.write(SMELL_OFF_VAL);
+        turnSmellOff();
         println("smell on for " + smelledForTime +"sec, turning smell off");
-        smellActive = false;
       }
     }
   }

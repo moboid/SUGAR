@@ -148,12 +148,12 @@ class GameplayScreen extends GameScreen
       horseP2.pranceTo( width/2 + nextPos.x, nextPos.y, nextTrick );
       
       // whoops, they other horse didn't perform with us.
-      if ( horseP1.performed == false && random(0,1) < POOP_CHANCE )
+      if ( horseP1.performed == false)
       {
         horseP1.poop();
       } 
       
-      if ( horseP2.performed == false && random(0,1) < POOP_CHANCE )
+      if ( horseP2.performed == false)
       {
         horseP2.poop();
       } 
@@ -177,6 +177,8 @@ class GameplayScreen extends GameScreen
   
   void awardPoint()
   {
+    SMELL_MANAGER.makeSmell(GOOD_JOB, 0);
+    SMELL_MANAGER.makeSmell(GOOD_JOB, 1);
     successfulTricks++;
     triggerParticleEffect();
     applause.trigger();

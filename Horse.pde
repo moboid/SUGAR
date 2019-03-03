@@ -459,6 +459,7 @@ class Horse
   
   void poop()
   {
+    SMELL_MANAGER.makeSmell(BAD_SHOW, playerIndex);
     println("Horse " + m_buttons[0] + " pooped!");
     PVector startAt = new PVector(m_screenPos.x + 20*m_xScale, m_screenPos.y - 40);
     PVector landAt = new PVector(m_screenPos.x + 30*m_xScale, m_screenPos.y);
